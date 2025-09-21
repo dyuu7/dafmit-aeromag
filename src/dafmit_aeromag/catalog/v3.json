@@ -1,0 +1,3698 @@
+{
+  "release": "v3",
+  "record_id": 12723700,
+  "version": "3",
+  "doi": "10.5281/zenodo.12723700",
+  "concept_doi": "10.5281/zenodo.4271803",
+  "title": "DAF-MIT AIA Open Flight Data for Magnetic Navigation Research",
+  "source_url": "https://zenodo.org/records/12723700",
+  "flights": [
+    {
+      "flight": 1002,
+      "collection": "2020",
+      "date": "2020-06-20",
+      "file": "Flt1002_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt1002_train.h5/content",
+      "size_bytes": 152971408,
+      "checksum": "d42e6579719e31d17115c9b8ed3e4471",
+      "dt": 0.1,
+      "has_holdout": true,
+      "notes": [
+        "2 calibrations (start & end)",
+        "10 repeat survey lines (5 Eastern Ontario & 5 Renfrew)",
+        "Eastern Ontario & Renfrew free-fly on drape",
+        "Renfrew free-fly at 555m",
+        "Missing Flux A data due to technical issue with instrument",
+        "Mag 2 periodically dropped signal at ~180 degree headings during pitch/roll maneuvers",
+        "Affected lines: 1002.02, 1369.00, 1002.20"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt1002_readme.txt"
+    },
+    {
+      "flight": 1003,
+      "collection": "2020",
+      "date": "2020-06-29",
+      "file": "Flt1003_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt1003_train.h5/content",
+      "size_bytes": 123103760,
+      "checksum": "bc0e819bebb8bc9d4814cdbce0fb911a",
+      "dt": 0.1,
+      "has_holdout": true,
+      "notes": [
+        "Eastern Ontario & Renfrew free-fly at 400m & 800m",
+        "Mag 2 periodically dropped signal at ~180 degree headings during pitch/roll maneuvers",
+        "Affected lines: 1003.01"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt1003_readme.txt"
+    },
+    {
+      "flight": 1004,
+      "collection": "2020",
+      "date": "2020-06-30",
+      "file": "Flt1004_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt1004_train.h5/content",
+      "size_bytes": 62722064,
+      "checksum": "a17c1678407c02f260d7250b4e6c3a15",
+      "dt": 0.1,
+      "has_holdout": true,
+      "notes": [
+        "Perth mini-survey (within Eastern Ontario) flown at 800m, flight 1 of 2",
+        "Split into two flights due to weather (low altitude clouds)"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt1004_readme.txt"
+    },
+    {
+      "flight": 1005,
+      "collection": "2020",
+      "date": "2020-07-02",
+      "file": "Flt1005_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt1005_train.h5/content",
+      "size_bytes": 62970128,
+      "checksum": "0065e0a270db7f53544ba8df247e1c12",
+      "dt": 0.1,
+      "has_holdout": true,
+      "notes": [
+        "Perth mini-survey (within Eastern Ontario) flown at 800m, flight 2 of 2",
+        "Split into two flights due to weather (low altitude clouds)"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt1005_readme.txt"
+    },
+    {
+      "flight": 1006,
+      "collection": "2020",
+      "date": "2020-07-06",
+      "file": "Flt1006_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt1006_train.h5/content",
+      "size_bytes": 83388944,
+      "checksum": "fb798e26d515673deae2e1b349b9e215",
+      "dt": 0.1,
+      "has_holdout": true,
+      "notes": [
+        "Calibration maneuvers in FOM at 3048m (10,000ft), 3962m (13,000ft), 5182m (17,000ft)",
+        "Calibration maneuvers in Eastern Ontario at 400m",
+        "Mag 2 periodically dropped signal at ~180 degree headings during pitch/roll maneuvers",
+        "Affected lines: 1006.02, 1006.03, 1006.04, 1006.06, 1006.07, 1006.08",
+        "Limited pilot comments written during flight due to challenging maneuvers"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt1006_readme.txt"
+    },
+    {
+      "flight": 1007,
+      "collection": "2020",
+      "date": "2020-07-07",
+      "file": "Flt1007_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt1007_train.h5/content",
+      "size_bytes": 88141328,
+      "checksum": "ad29d8bb5ab8a3c97ac02b8f83b41b01",
+      "dt": 0.1,
+      "has_holdout": true,
+      "notes": [
+        "Free-fly in Perth mini-survey area at 800m",
+        "Free-fly in Eastern Ontario & Renfrew at 400m"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt1007_readme.txt"
+    },
+    {
+      "flight": 2001,
+      "collection": "2021",
+      "date": "2021-12-13",
+      "file": "Flt2001_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt2001_train.h5/content",
+      "size_bytes": 40662556,
+      "checksum": "5bbd841816c8ec2eed83f3492d66bcc0",
+      "dt": 0.1,
+      "has_holdout": false,
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt2001_readme.txt"
+    },
+    {
+      "flight": 2002,
+      "collection": "2021",
+      "date": "2021-12-14",
+      "file": "Flt2002_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt2002_train.h5/content",
+      "size_bytes": 68282868,
+      "checksum": "51a9d54135ab966086223d65dd562c1b",
+      "dt": 0.1,
+      "has_holdout": false,
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt2002_readme.txt"
+    },
+    {
+      "flight": 2004,
+      "collection": "2021",
+      "date": "2021-12-19",
+      "file": "Flt2004_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt2004_train.h5/content",
+      "size_bytes": 84595244,
+      "checksum": "8cb2b886dedbad8285f54d744b509545",
+      "dt": 0.1,
+      "has_holdout": false,
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt2004_readme.txt"
+    },
+    {
+      "flight": 2005,
+      "collection": "2021",
+      "date": "2021-12-21",
+      "file": "Flt2005_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt2005_train.h5/content",
+      "size_bytes": 3235396,
+      "checksum": "762e902bb3363508d5b947b7f4910eed",
+      "dt": 0.1,
+      "has_holdout": true,
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt2005_readme.txt"
+    },
+    {
+      "flight": 2006,
+      "collection": "2021",
+      "date": "2021-12-23",
+      "file": "Flt2006_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt2006_train.h5/content",
+      "size_bytes": 97903980,
+      "checksum": "fbecffa0ed4d7c7422a0c3117097cea7",
+      "dt": 0.1,
+      "has_holdout": false,
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt2006_readme.txt"
+    },
+    {
+      "flight": 2007,
+      "collection": "2021",
+      "date": "2021-12-24",
+      "file": "Flt2007_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt2007_train.h5/content",
+      "size_bytes": 41428716,
+      "checksum": "a8ed06c21d699ac09851fb70382ca749",
+      "dt": 0.1,
+      "has_holdout": false,
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt2007_readme.txt"
+    },
+    {
+      "flight": 2008,
+      "collection": "2021",
+      "date": "2021-12-27",
+      "file": "Flt2008_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt2008_train.h5/content",
+      "size_bytes": 42316388,
+      "checksum": "61ddabd6289e3b5143d369e6577893db",
+      "dt": 0.1,
+      "has_holdout": false,
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt2008_readme.txt"
+    },
+    {
+      "flight": 2015,
+      "collection": "2021",
+      "date": "2022-01-03",
+      "file": "Flt2015_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt2015_train.h5/content",
+      "size_bytes": 113524860,
+      "checksum": "210bef7ceb2f4c775d028b5c44445197",
+      "dt": 0.1,
+      "has_holdout": false,
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt2015_readme.txt"
+    },
+    {
+      "flight": 2016,
+      "collection": "2021",
+      "date": "2022-01-04",
+      "file": "Flt2016_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt2016_train.h5/content",
+      "size_bytes": 79494180,
+      "checksum": "88d4b27e41430a2d898a8ebd027074b9",
+      "dt": 0.1,
+      "has_holdout": false,
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt2016_readme.txt"
+    },
+    {
+      "flight": 2017,
+      "collection": "2021",
+      "date": "2022-01-05",
+      "file": "Flt2017_train.h5",
+      "url": "https://zenodo.org/api/records/12723700/files/Flt2017_train.h5/content",
+      "size_bytes": 9208516,
+      "checksum": "57750c10ba2ade13f01f46eb7551890f",
+      "dt": 0.1,
+      "has_holdout": true,
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/Flt2017_readme.txt"
+    }
+  ],
+  "fields": [
+    {
+      "name": "line",
+      "units": "-",
+      "description": "line number",
+      "collection": "2020",
+      "group": "identity",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flight",
+      "units": "-",
+      "description": "flight number",
+      "collection": "2020",
+      "group": "identity",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "year",
+      "units": "-",
+      "description": "year",
+      "collection": "2020",
+      "group": "identity",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "doy",
+      "units": "-",
+      "description": "day of year",
+      "collection": "2020",
+      "group": "identity",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "tt",
+      "units": "s",
+      "description": "fiducial seconds past midnight UTC",
+      "collection": "2020",
+      "group": "identity",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "utm_x",
+      "units": "m",
+      "description": "x-coordinate, WGS-84 UTM zone 18N",
+      "collection": "2020",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "utm_y",
+      "units": "m",
+      "description": "y-coordinate, WGS-84 UTM zone 18N",
+      "collection": "2020",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "utm_z",
+      "units": "m",
+      "description": "z-coordinate, GPS altitude (WGS-84)",
+      "collection": "2020",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "msl",
+      "units": "m",
+      "description": "z-coordinate, GPS altitude above EGM2008 Geoid",
+      "collection": "2020",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "lat",
+      "units": "deg",
+      "description": "latitude, WGS-84",
+      "collection": "2020",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "lon",
+      "units": "deg",
+      "description": "longitude, WGS-84",
+      "collection": "2020",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "baro",
+      "units": "m",
+      "description": "barometric altimeter",
+      "collection": "2020",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "radar",
+      "units": "m",
+      "description": "filtered radar altimeter",
+      "collection": "2020",
+      "group": "navigation",
+      "notes": [
+        "unavailable at some times due to flown altitude exceeding instrument range"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "topo",
+      "units": "m",
+      "description": "radar topography (WGS-84)",
+      "collection": "2020",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "dem",
+      "units": "m",
+      "description": "digital elevation model from SRTM (WGS-84)",
+      "collection": "2020",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "drape",
+      "units": "m",
+      "description": "planned survey drape (WGS-84)",
+      "collection": "2020",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ins_pitch",
+      "units": "deg",
+      "description": "INS-computed aircraft pitch",
+      "collection": "2020",
+      "group": "ins",
+      "notes": [
+        "convention: yaw clockwise from north, then pitch up, then roll to starboard"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ins_roll",
+      "units": "deg",
+      "description": "INS-computed aircraft roll",
+      "collection": "2020",
+      "group": "ins",
+      "notes": [
+        "convention: yaw clockwise from north, then pitch up, then roll to starboard"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ins_yaw",
+      "units": "deg",
+      "description": "INS-computed aircraft yaw",
+      "collection": "2020",
+      "group": "ins",
+      "notes": [
+        "convention: yaw clockwise from north, then pitch up, then roll to starboard"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "diurnal",
+      "units": "nT",
+      "description": "measured diurnal",
+      "collection": "2020",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "mag_1_c",
+      "units": "nT",
+      "description": "Mag 1: compensated magnetic field",
+      "collection": "2020",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "mag_1_lag",
+      "units": "nT",
+      "description": "Mag 1: lag-corrected magnetic field",
+      "collection": "2020",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "mag_1_dc",
+      "units": "nT",
+      "description": "Mag 1: diurnal-corrected magnetic field",
+      "collection": "2020",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "mag_1_igrf",
+      "units": "nT",
+      "description": "Mag 1: IGRF & diurnal-corrected magnetic field",
+      "collection": "2020",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "mag_1_uc",
+      "units": "nT",
+      "description": "Mag 1: uncompensated magnetic field",
+      "collection": "2020",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "mag_2_uc",
+      "units": "nT",
+      "description": "Mag 2: uncompensated magnetic field",
+      "collection": "2020",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "mag_3_uc",
+      "units": "nT",
+      "description": "Mag 3: uncompensated magnetic field",
+      "collection": "2020",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "mag_4_uc",
+      "units": "nT",
+      "description": "Mag 4: uncompensated magnetic field",
+      "collection": "2020",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "mag_5_uc",
+      "units": "nT",
+      "description": "Mag 5: uncompensated magnetic field",
+      "collection": "2020",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "mag_6_uc",
+      "units": "nT",
+      "description": "Mag 6: uncompensated magnetic field",
+      "collection": "2020",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_a_x",
+      "units": "nT",
+      "description": "Flux A: fluxgate x-axis",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_a_y",
+      "units": "nT",
+      "description": "Flux A: fluxgate y-axis",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_a_z",
+      "units": "nT",
+      "description": "Flux A: fluxgate z-axis",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_a_t",
+      "units": "nT",
+      "description": "Flux A: fluxgate total",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_b_x",
+      "units": "nT",
+      "description": "Flux B: fluxgate x-axis",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_b_y",
+      "units": "nT",
+      "description": "Flux B: fluxgate y-axis",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_b_z",
+      "units": "nT",
+      "description": "Flux B: fluxgate z-axis",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_b_t",
+      "units": "nT",
+      "description": "Flux B: fluxgate total",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_c_x",
+      "units": "nT",
+      "description": "Flux C: fluxgate x-axis",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_c_y",
+      "units": "nT",
+      "description": "Flux C: fluxgate y-axis",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_c_z",
+      "units": "nT",
+      "description": "Flux C: fluxgate z-axis",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_c_t",
+      "units": "nT",
+      "description": "Flux C: fluxgate total",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_d_x",
+      "units": "nT",
+      "description": "Flux D: fluxgate x-axis",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_d_y",
+      "units": "nT",
+      "description": "Flux D: fluxgate y-axis",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_d_z",
+      "units": "nT",
+      "description": "Flux D: fluxgate z-axis",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "flux_d_t",
+      "units": "nT",
+      "description": "Flux D: fluxgate total",
+      "collection": "2020",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ogs_mag",
+      "units": "nT",
+      "description": "OGS survey diurnal-corrected, levelled, magnetic field",
+      "collection": "2020",
+      "group": "reference",
+      "notes": [
+        "included for reference only",
+        "sampled from original Ontario Geological Survey flown in 2013",
+        "unavailable at some times due to flown position not over original OGS survey"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ogs_alt",
+      "units": "m",
+      "description": "OGS survey, GPS altitude (WGS-84)",
+      "collection": "2020",
+      "group": "reference",
+      "notes": [
+        "included for reference only",
+        "sampled from original Ontario Geological Survey flown in 2013",
+        "unavailable at some times due to flown position not over original OGS survey"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ins_acc_x",
+      "units": "m/s^2",
+      "description": "INS x-acceleration",
+      "collection": "2020",
+      "group": "ins",
+      "notes": [
+        "AIRGrav (airborne gravimeter) system (http://www.sgl.com/Gravity.html)",
+        "3-axis gimballed INS, run in local-level, wander-angle mechanization",
+        "corrected for temperature, misalignment, and scale factor",
+        "digitizers used for accelerometers are sigma-delta type and require low-pass",
+        "ins_acc_x: nominally horizontal, ccw from north by ins_wander [rad]",
+        "ins_acc_y: nominally horizontal, 90 [deg] ccw from ins_acc_x",
+        "ins_acc_z: nominally vertical (up), includes gravity term (~navigation frame)"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ins_acc_y",
+      "units": "m/s^2",
+      "description": "INS y-acceleration",
+      "collection": "2020",
+      "group": "ins",
+      "notes": [
+        "AIRGrav (airborne gravimeter) system (http://www.sgl.com/Gravity.html)",
+        "3-axis gimballed INS, run in local-level, wander-angle mechanization",
+        "corrected for temperature, misalignment, and scale factor",
+        "digitizers used for accelerometers are sigma-delta type and require low-pass",
+        "ins_acc_x: nominally horizontal, ccw from north by ins_wander [rad]",
+        "ins_acc_y: nominally horizontal, 90 [deg] ccw from ins_acc_x",
+        "ins_acc_z: nominally vertical (up), includes gravity term (~navigation frame)"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ins_acc_z",
+      "units": "m/s^2",
+      "description": "INS z-acceleration",
+      "collection": "2020",
+      "group": "ins",
+      "notes": [
+        "AIRGrav (airborne gravimeter) system (http://www.sgl.com/Gravity.html)",
+        "3-axis gimballed INS, run in local-level, wander-angle mechanization",
+        "corrected for temperature, misalignment, and scale factor",
+        "digitizers used for accelerometers are sigma-delta type and require low-pass",
+        "ins_acc_x: nominally horizontal, ccw from north by ins_wander [rad]",
+        "ins_acc_y: nominally horizontal, 90 [deg] ccw from ins_acc_x",
+        "ins_acc_z: nominally vertical (up), includes gravity term (~navigation frame)"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ins_wander",
+      "units": "rad",
+      "description": "INS-computed wander angle (ccw from north)",
+      "collection": "2020",
+      "group": "ins",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ins_lat",
+      "units": "rad",
+      "description": "INS-computed latitude",
+      "collection": "2020",
+      "group": "ins",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ins_lon",
+      "units": "rad",
+      "description": "INS-computed longitude",
+      "collection": "2020",
+      "group": "ins",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ins_alt",
+      "units": "m",
+      "description": "INS-computed altitude (WGS-84)",
+      "collection": "2020",
+      "group": "ins",
+      "notes": [
+        "combined GPS/inertial altitude computed in real time, contains lag error"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ins_vn",
+      "units": "m/s",
+      "description": "INS-computed north velocity",
+      "collection": "2020",
+      "group": "ins",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ins_vw",
+      "units": "m/s",
+      "description": "INS-computed west velocity",
+      "collection": "2020",
+      "group": "ins",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ins_vu",
+      "units": "m/s",
+      "description": "INS-computed vertical (up) velocity",
+      "collection": "2020",
+      "group": "ins",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "pitch_rate",
+      "units": "deg/s",
+      "description": "avionics-computed pitch rate",
+      "collection": "2020",
+      "group": "avionics",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "roll_rate",
+      "units": "deg/s",
+      "description": "avionics-computed roll rate",
+      "collection": "2020",
+      "group": "avionics",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "yaw_rate",
+      "units": "deg/s",
+      "description": "avionics-computed yaw rate",
+      "collection": "2020",
+      "group": "avionics",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "lgtl_acc",
+      "units": "g",
+      "description": "avionics-computed longitudinal (forward) acceleration",
+      "collection": "2020",
+      "group": "avionics",
+      "notes": [
+        "Garmin avionics module 010-0G600-00 (https://www.garmin.com/en-US/p/6427)",
+        "nrml_acc does not include gravity term (body frame)"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "ltrl_acc",
+      "units": "g",
+      "description": "avionics-computed lateral (starboard) acceleration",
+      "collection": "2020",
+      "group": "avionics",
+      "notes": [
+        "Garmin avionics module 010-0G600-00 (https://www.garmin.com/en-US/p/6427)",
+        "nrml_acc does not include gravity term (body frame)"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "nrml_acc",
+      "units": "g",
+      "description": "avionics-computed normal (vertical) acceleration",
+      "collection": "2020",
+      "group": "avionics",
+      "notes": [
+        "Garmin avionics module 010-0G600-00 (https://www.garmin.com/en-US/p/6427)",
+        "nrml_acc does not include gravity term (body frame)"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "tas",
+      "units": "m/s",
+      "description": "avionics-computed true airspeed",
+      "collection": "2020",
+      "group": "avionics",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "pitot_p",
+      "units": "kPa",
+      "description": "avionics-computed pitot pressure",
+      "collection": "2020",
+      "group": "avionics",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "static_p",
+      "units": "kPa",
+      "description": "avionics-computed static pressure",
+      "collection": "2020",
+      "group": "avionics",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "total_p",
+      "units": "kPa",
+      "description": "avionics-computed total pressure",
+      "collection": "2020",
+      "group": "avionics",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_com_1",
+      "units": "A",
+      "description": "current sensor: aircraft radio 1",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_ac_hi",
+      "units": "A",
+      "description": "current sensor: air conditioner fan high",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_ac_lo",
+      "units": "A",
+      "description": "current sensor: air conditioner fan low",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_tank",
+      "units": "A",
+      "description": "current sensor: cabin fuel pump",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_flap",
+      "units": "A",
+      "description": "current sensor: flap motor",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_strb",
+      "units": "A",
+      "description": "current sensor: strobe lights",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_srvo_o",
+      "units": "A",
+      "description": "current sensor: INS outer servo",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_srvo_m",
+      "units": "A",
+      "description": "current sensor: INS middle servo",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_srvo_i",
+      "units": "A",
+      "description": "current sensor: INS inner servo",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_heat",
+      "units": "A",
+      "description": "current sensor: INS heater",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_acpwr",
+      "units": "A",
+      "description": "current sensor: aircraft power",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_outpwr",
+      "units": "A",
+      "description": "current sensor: system output power",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_bat_1",
+      "units": "A",
+      "description": "current sensor: battery 1",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "cur_bat_2",
+      "units": "A",
+      "description": "current sensor: battery 2",
+      "collection": "2020",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_acpwr",
+      "units": "V",
+      "description": "voltage sensor: aircraft power",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_outpwr",
+      "units": "V",
+      "description": "voltage sensor: system output power",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_bat_1",
+      "units": "V",
+      "description": "voltage sensor: battery 1",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_bat_2",
+      "units": "V",
+      "description": "voltage sensor: battery 2",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_res_p",
+      "units": "V",
+      "description": "voltage sensor: resolver board (+)",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_res_n",
+      "units": "V",
+      "description": "voltage sensor: resolver board (-)",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_back_p",
+      "units": "V",
+      "description": "voltage sensor: backplane (+)",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_back_n",
+      "units": "V",
+      "description": "voltage sensor: backplane (-)",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_gyro_1",
+      "units": "V",
+      "description": "voltage sensor: gyroscope 1",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_gyro_2",
+      "units": "V",
+      "description": "voltage sensor: gyroscope 2",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_acc_p",
+      "units": "V",
+      "description": "voltage sensor: INS accelerometers (+)",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_acc_n",
+      "units": "V",
+      "description": "voltage sensor: INS accelerometers (-)",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_block",
+      "units": "V",
+      "description": "voltage sensor: block",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_back",
+      "units": "V",
+      "description": "voltage sensor: backplane",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_srvo",
+      "units": "V",
+      "description": "voltage sensor: servos",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_cabt",
+      "units": "V",
+      "description": "voltage sensor: cabinet",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "vol_fan",
+      "units": "V",
+      "description": "voltage sensor: cooling fan",
+      "collection": "2020",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "name": "line",
+      "units": "-",
+      "description": "line number",
+      "collection": "2021",
+      "group": "identity",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flight",
+      "units": "-",
+      "description": "flight number",
+      "collection": "2021",
+      "group": "identity",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "year",
+      "units": "-",
+      "description": "year",
+      "collection": "2021",
+      "group": "identity",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "doy",
+      "units": "-",
+      "description": "day of year",
+      "collection": "2021",
+      "group": "identity",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "tt",
+      "units": "s",
+      "description": "fiducial seconds past midnight UTC",
+      "collection": "2021",
+      "group": "identity",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "utm_x",
+      "units": "m",
+      "description": "x-coordinate, WGS-84 UTM zone 18N",
+      "collection": "2021",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "utm_y",
+      "units": "m",
+      "description": "y-coordinate, WGS-84 UTM zone 18N",
+      "collection": "2021",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "utm_z",
+      "units": "m",
+      "description": "z-coordinate, GPS altitude (WGS-84)",
+      "collection": "2021",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "msl",
+      "units": "m",
+      "description": "z-coordinate, GPS altitude above EGM2008 Geoid",
+      "collection": "2021",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "lat",
+      "units": "deg",
+      "description": "latitude, WGS-84",
+      "collection": "2021",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "lon",
+      "units": "deg",
+      "description": "longitude, WGS-84",
+      "collection": "2021",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "baro",
+      "units": "m",
+      "description": "barometric altimeter",
+      "collection": "2021",
+      "group": "navigation",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "ins_pitch",
+      "units": "deg",
+      "description": "INS-computed aircraft pitch",
+      "collection": "2021",
+      "group": "ins",
+      "notes": [
+        "convention: yaw clockwise from north, then pitch up, then roll to starboard"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "ins_roll",
+      "units": "deg",
+      "description": "INS-computed aircraft roll",
+      "collection": "2021",
+      "group": "ins",
+      "notes": [
+        "convention: yaw clockwise from north, then pitch up, then roll to starboard"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "ins_yaw",
+      "units": "deg",
+      "description": "INS-computed aircraft yaw",
+      "collection": "2021",
+      "group": "ins",
+      "notes": [
+        "convention: yaw clockwise from north, then pitch up, then roll to starboard"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "diurnal",
+      "units": "nT",
+      "description": "measured diurnal",
+      "collection": "2021",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "mag_1_c",
+      "units": "nT",
+      "description": "Mag 1: compensated magnetic field",
+      "collection": "2021",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "mag_1_lag",
+      "units": "nT",
+      "description": "Mag 1: lag-corrected magnetic field",
+      "collection": "2021",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "mag_1_dc",
+      "units": "nT",
+      "description": "Mag 1: diurnal-corrected magnetic field",
+      "collection": "2021",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "mag_1_igrf",
+      "units": "nT",
+      "description": "Mag 1: IGRF & diurnal-corrected magnetic field",
+      "collection": "2021",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "mag_1_uc",
+      "units": "nT",
+      "description": "Mag 1: uncompensated magnetic field",
+      "collection": "2021",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "mag_2_uc",
+      "units": "nT",
+      "description": "Mag 2: uncompensated magnetic field",
+      "collection": "2021",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "mag_3_uc",
+      "units": "nT",
+      "description": "Mag 3: uncompensated magnetic field",
+      "collection": "2021",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "mag_4_uc",
+      "units": "nT",
+      "description": "Mag 4: uncompensated magnetic field",
+      "collection": "2021",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "mag_5_uc",
+      "units": "nT",
+      "description": "Mag 5: uncompensated magnetic field",
+      "collection": "2021",
+      "group": "scalar_magnetometer",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_a_x",
+      "units": "nT",
+      "description": "Flux A: fluxgate x-axis",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_a_y",
+      "units": "nT",
+      "description": "Flux A: fluxgate y-axis",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_a_z",
+      "units": "nT",
+      "description": "Flux A: fluxgate z-axis",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_a_t",
+      "units": "nT",
+      "description": "Flux A: fluxgate total",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_b_x",
+      "units": "nT",
+      "description": "Flux B: fluxgate x-axis",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_b_y",
+      "units": "nT",
+      "description": "Flux B: fluxgate y-axis",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_b_z",
+      "units": "nT",
+      "description": "Flux B: fluxgate z-axis",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_b_t",
+      "units": "nT",
+      "description": "Flux B: fluxgate total",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_c_x",
+      "units": "nT",
+      "description": "Flux C: fluxgate x-axis",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_c_y",
+      "units": "nT",
+      "description": "Flux C: fluxgate y-axis",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_c_z",
+      "units": "nT",
+      "description": "Flux C: fluxgate z-axis",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_c_t",
+      "units": "nT",
+      "description": "Flux C: fluxgate total",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_d_x",
+      "units": "nT",
+      "description": "Flux D: fluxgate x-axis",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_d_y",
+      "units": "nT",
+      "description": "Flux D: fluxgate y-axis",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_d_z",
+      "units": "nT",
+      "description": "Flux D: fluxgate z-axis",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "flux_d_t",
+      "units": "nT",
+      "description": "Flux D: fluxgate total",
+      "collection": "2021",
+      "group": "fluxgate",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "ins_acc_x",
+      "units": "m/s^2",
+      "description": "INS x-acceleration",
+      "collection": "2021",
+      "group": "ins",
+      "notes": [
+        "AIRGrav (airborne gravimeter) system (http://www.sgl.com/Gravity.html)",
+        "3-axis gimballed INS, run in local-level, wander-angle mechanization",
+        "corrected for temperature, misalignment, and scale factor",
+        "digitizers used for accelerometers are sigma-delta type and require low-pass",
+        "ins_acc_x: nominally horizontal, ccw from north by ins_wander [rad]",
+        "ins_acc_y: nominally horizontal, 90 [deg] ccw from ins_acc_x",
+        "ins_acc_z: nominally vertical (up), includes gravity term (~navigation frame)"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "ins_acc_y",
+      "units": "m/s^2",
+      "description": "INS y-acceleration",
+      "collection": "2021",
+      "group": "ins",
+      "notes": [
+        "AIRGrav (airborne gravimeter) system (http://www.sgl.com/Gravity.html)",
+        "3-axis gimballed INS, run in local-level, wander-angle mechanization",
+        "corrected for temperature, misalignment, and scale factor",
+        "digitizers used for accelerometers are sigma-delta type and require low-pass",
+        "ins_acc_x: nominally horizontal, ccw from north by ins_wander [rad]",
+        "ins_acc_y: nominally horizontal, 90 [deg] ccw from ins_acc_x",
+        "ins_acc_z: nominally vertical (up), includes gravity term (~navigation frame)"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "ins_acc_z",
+      "units": "m/s^2",
+      "description": "INS z-acceleration",
+      "collection": "2021",
+      "group": "ins",
+      "notes": [
+        "AIRGrav (airborne gravimeter) system (http://www.sgl.com/Gravity.html)",
+        "3-axis gimballed INS, run in local-level, wander-angle mechanization",
+        "corrected for temperature, misalignment, and scale factor",
+        "digitizers used for accelerometers are sigma-delta type and require low-pass",
+        "ins_acc_x: nominally horizontal, ccw from north by ins_wander [rad]",
+        "ins_acc_y: nominally horizontal, 90 [deg] ccw from ins_acc_x",
+        "ins_acc_z: nominally vertical (up), includes gravity term (~navigation frame)"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "ins_wander",
+      "units": "rad",
+      "description": "INS-computed wander angle (ccw from north)",
+      "collection": "2021",
+      "group": "ins",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "ins_lat",
+      "units": "rad",
+      "description": "INS-computed latitude",
+      "collection": "2021",
+      "group": "ins",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "ins_lon",
+      "units": "rad",
+      "description": "INS-computed longitude",
+      "collection": "2021",
+      "group": "ins",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "ins_alt",
+      "units": "m",
+      "description": "INS-computed altitude (WGS-84)",
+      "collection": "2021",
+      "group": "ins",
+      "notes": [
+        "combined GPS/inertial altitude computed in real time, contains lag error"
+      ],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "ins_vn",
+      "units": "m/s",
+      "description": "INS-computed north velocity",
+      "collection": "2021",
+      "group": "ins",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "ins_vw",
+      "units": "m/s",
+      "description": "INS-computed west velocity",
+      "collection": "2021",
+      "group": "ins",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "ins_vu",
+      "units": "m/s",
+      "description": "INS-computed vertical (up) velocity",
+      "collection": "2021",
+      "group": "ins",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "cur_com_1",
+      "units": "A",
+      "description": "current sensor: aircraft radio 1",
+      "collection": "2021",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "cur_ac_hi",
+      "units": "A",
+      "description": "current sensor: air conditioner fan high",
+      "collection": "2021",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "cur_ac_lo",
+      "units": "A",
+      "description": "current sensor: air conditioner fan low",
+      "collection": "2021",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "cur_tank",
+      "units": "A",
+      "description": "current sensor: cabin fuel pump",
+      "collection": "2021",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "cur_flap",
+      "units": "A",
+      "description": "current sensor: flap motor",
+      "collection": "2021",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "cur_strb",
+      "units": "A",
+      "description": "current sensor: strobe lights",
+      "collection": "2021",
+      "group": "current",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "vol_block",
+      "units": "V",
+      "description": "voltage sensor: block",
+      "collection": "2021",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "vol_back",
+      "units": "V",
+      "description": "voltage sensor: backplane",
+      "collection": "2021",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "vol_cabt",
+      "units": "V",
+      "description": "voltage sensor: cabinet",
+      "collection": "2021",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "name": "vol_fan",
+      "units": "V",
+      "description": "voltage sensor: cooling fan",
+      "collection": "2021",
+      "group": "voltage",
+      "notes": [],
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    }
+  ],
+  "segments": [
+    {
+      "flight": 1002,
+      "segment": 1,
+      "line": "1002.01",
+      "start_tt": 45100.0,
+      "end_tt": 46370.0,
+      "description": "Takeoff - Transit to Shawville",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 2,
+      "line": "1002.02",
+      "start_tt": 46370.0,
+      "end_tt": 47600.0,
+      "description": "Shawville calibration 1",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 3,
+      "line": "1002.03",
+      "start_tt": 47600.0,
+      "end_tt": 49310.0,
+      "description": "Transit to Renfrew",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 4,
+      "line": "158.00",
+      "start_tt": 49310.0,
+      "end_tt": 49838.1,
+      "description": "Renfrew repeat line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 5,
+      "line": "1002.04",
+      "start_tt": 49838.1,
+      "end_tt": 50051.9,
+      "description": "Renfrew turn",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 6,
+      "line": "160.00",
+      "start_tt": 50051.9,
+      "end_tt": 50560.5,
+      "description": "Renfrew repeat line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 7,
+      "line": "1002.05",
+      "start_tt": 50560.5,
+      "end_tt": 50903.8,
+      "description": "Renfrew turn",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 8,
+      "line": "1367.00",
+      "start_tt": 50903.8,
+      "end_tt": 51444.4,
+      "description": "Renfrew repeat line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 9,
+      "line": "1002.06",
+      "start_tt": 51444.4,
+      "end_tt": 51773.5,
+      "description": "Renfrew turn",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 10,
+      "line": "1368.00",
+      "start_tt": 51773.5,
+      "end_tt": 52294.9,
+      "description": "Renfrew repeat line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 11,
+      "line": "1002.07",
+      "start_tt": 52294.9,
+      "end_tt": 52515.2,
+      "description": "Renfrew turn",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 12,
+      "line": "1369.00",
+      "start_tt": 52515.2,
+      "end_tt": 53079.2,
+      "description": "Renfrew repeat line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 13,
+      "line": "1002.08",
+      "start_tt": 53079.2,
+      "end_tt": 53550.8,
+      "description": "Transit to Eastern Ontario",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 14,
+      "line": "3084.00",
+      "start_tt": 53550.8,
+      "end_tt": 54099.4,
+      "description": "Eastern Ontario repeat line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 15,
+      "line": "1002.09",
+      "start_tt": 54099.4,
+      "end_tt": 54376.8,
+      "description": "Eastern Ontario turn",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 16,
+      "line": "3085.00",
+      "start_tt": 54376.8,
+      "end_tt": 54910.6,
+      "description": "Eastern Ontario repeat line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 17,
+      "line": "1002.10",
+      "start_tt": 54910.6,
+      "end_tt": 55142.4,
+      "description": "Eastern Ontario turn",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 18,
+      "line": "3086.00",
+      "start_tt": 55142.4,
+      "end_tt": 55691.0,
+      "description": "Eastern Ontario repeat line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 19,
+      "line": "1002.11",
+      "start_tt": 55691.0,
+      "end_tt": 56064.4,
+      "description": "Eastern Ontario turn",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 20,
+      "line": "320.00",
+      "start_tt": 56064.4,
+      "end_tt": 56597.5,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 1002,
+      "segment": 21,
+      "line": "1002.12",
+      "start_tt": 56597.5,
+      "end_tt": 56808.4,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 1002,
+      "segment": 22,
+      "line": "322.00",
+      "start_tt": 56808.4,
+      "end_tt": 57319.2,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 1002,
+      "segment": 23,
+      "line": "1002.13",
+      "start_tt": 57319.2,
+      "end_tt": 57489.0,
+      "description": "Transit to Eastern Ontario",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 24,
+      "line": "1002.14",
+      "start_tt": 57489.0,
+      "end_tt": 59946.0,
+      "description": "Eastern Ontario free-fly on drape",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 25,
+      "line": "1002.14",
+      "start_tt": 59946.0,
+      "end_tt": 60846.0,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 1002,
+      "segment": 26,
+      "line": "1002.15",
+      "start_tt": 60846.0,
+      "end_tt": 61360.0,
+      "description": "Transit to Renfrew",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 27,
+      "line": "1002.16",
+      "start_tt": 61360.0,
+      "end_tt": 63035.0,
+      "description": "Renfrew free-fly on drape",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 28,
+      "line": "1002.16",
+      "start_tt": 63035.0,
+      "end_tt": 63935.0,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 1002,
+      "segment": 29,
+      "line": "1002.17",
+      "start_tt": 63935.0,
+      "end_tt": 65812.0,
+      "description": "Renfrew free-fly at 555m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 30,
+      "line": "1002.18",
+      "start_tt": 65812.0,
+      "end_tt": 66310.0,
+      "description": "Climb to 2400m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 31,
+      "line": "1002.19",
+      "start_tt": 66310.0,
+      "end_tt": 66560.0,
+      "description": "Transit to Shawville",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 32,
+      "line": "1002.20",
+      "start_tt": 66560.0,
+      "end_tt": 67850.0,
+      "description": "Shawville calibration 2",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1002,
+      "segment": 33,
+      "line": "1002.21",
+      "start_tt": 67850.0,
+      "end_tt": 68910.0,
+      "description": "Transit to base",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1003,
+      "segment": 1,
+      "line": "1003.01",
+      "start_tt": 49820.0,
+      "end_tt": 50713.0,
+      "description": "Takeoff - Transit to Eastern Ontario",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1003,
+      "segment": 2,
+      "line": "1003.02",
+      "start_tt": 50713.0,
+      "end_tt": 54497.0,
+      "description": "Eastern Ontario free-fly at 400m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1003,
+      "segment": 3,
+      "line": "1003.03",
+      "start_tt": 54497.0,
+      "end_tt": 54639.0,
+      "description": "Climb to 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1003,
+      "segment": 4,
+      "line": "1003.04",
+      "start_tt": 54639.0,
+      "end_tt": 59475.0,
+      "description": "Eastern Ontario free-fly at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1003,
+      "segment": 5,
+      "line": "1003.05",
+      "start_tt": 59475.0,
+      "end_tt": 59926.0,
+      "description": "Transit at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1003,
+      "segment": 6,
+      "line": "1003.06",
+      "start_tt": 59926.0,
+      "end_tt": 60105.0,
+      "description": "Descent/Transit to 400m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1003,
+      "segment": 7,
+      "line": "1003.07",
+      "start_tt": 60105.0,
+      "end_tt": 60243.0,
+      "description": "Transit to Renfrew",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1003,
+      "segment": 8,
+      "line": "1003.08",
+      "start_tt": 60243.0,
+      "end_tt": 64586.0,
+      "description": "Renfrew free-fly at 400m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1003,
+      "segment": 9,
+      "line": "1003.09",
+      "start_tt": 64586.0,
+      "end_tt": 64763.0,
+      "description": "Climb to 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1003,
+      "segment": 10,
+      "line": "1003.10",
+      "start_tt": 64763.0,
+      "end_tt": 69252.0,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 1003,
+      "segment": 11,
+      "line": "1003.11",
+      "start_tt": 69252.0,
+      "end_tt": 70311.0,
+      "description": "Transit to base",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 1,
+      "line": "1004.01",
+      "start_tt": 44370.0,
+      "end_tt": 45175.33,
+      "description": "Takeoff - Transit to Perth mini-survey area",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 2,
+      "line": "4019.00",
+      "start_tt": 45175.33,
+      "end_tt": 45746.48,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 3,
+      "line": "4018.00",
+      "start_tt": 45901.4,
+      "end_tt": 46489.18,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 4,
+      "line": "4017.00",
+      "start_tt": 46600.79,
+      "end_tt": 47185.91,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 5,
+      "line": "4016.00",
+      "start_tt": 47355.27,
+      "end_tt": 47947.72,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 6,
+      "line": "421.00",
+      "start_tt": 48136.35,
+      "end_tt": 48305.71,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 7,
+      "line": "419.00",
+      "start_tt": 48495.46,
+      "end_tt": 48685.78,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 8,
+      "line": "417.00",
+      "start_tt": 48809.62,
+      "end_tt": 48987.55,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 9,
+      "line": "415.00",
+      "start_tt": 49242.19,
+      "end_tt": 49444.48,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 10,
+      "line": "413.00",
+      "start_tt": 49575.08,
+      "end_tt": 49743.7,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 11,
+      "line": "411.00",
+      "start_tt": 49909.65,
+      "end_tt": 50098.68,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 12,
+      "line": "409.00",
+      "start_tt": 50227.35,
+      "end_tt": 50390.9,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 13,
+      "line": "408.00",
+      "start_tt": 50526.02,
+      "end_tt": 50717.6,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 14,
+      "line": "407.00",
+      "start_tt": 50809.17,
+      "end_tt": 50973.1,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 15,
+      "line": "405.00",
+      "start_tt": 51125.22,
+      "end_tt": 51336.33,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 16,
+      "line": "403.00",
+      "start_tt": 51458.76,
+      "end_tt": 51626.89,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 17,
+      "line": "401.00",
+      "start_tt": 51805.4,
+      "end_tt": 51999.6,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 18,
+      "line": "4015.00",
+      "start_tt": 52256.06,
+      "end_tt": 52862.14,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 19,
+      "line": "4014.00",
+      "start_tt": 52982.8,
+      "end_tt": 53588.29,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 1004,
+      "segment": 20,
+      "line": "4013.00",
+      "start_tt": 53774.43,
+      "end_tt": 54375.97,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 1004,
+      "segment": 21,
+      "line": "4012.00",
+      "start_tt": 54518.19,
+      "end_tt": 55115.23,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 22,
+      "line": "4001.00",
+      "start_tt": 55285.8,
+      "end_tt": 55891.29,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1004,
+      "segment": 23,
+      "line": "1004.02",
+      "start_tt": 55891.29,
+      "end_tt": 56891.0,
+      "description": "Transit to base",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1005,
+      "segment": 1,
+      "line": "1005.01",
+      "start_tt": 45788.0,
+      "end_tt": 48085.0,
+      "description": "Takeoff - Transit to Perth mini-survey area",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1005,
+      "segment": 2,
+      "line": "4011.00",
+      "start_tt": 48085.0,
+      "end_tt": 48666.66,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1005,
+      "segment": 3,
+      "line": "4010.00",
+      "start_tt": 48847.12,
+      "end_tt": 49498.52,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1005,
+      "segment": 4,
+      "line": "4009.00",
+      "start_tt": 49659.65,
+      "end_tt": 50241.6,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1005,
+      "segment": 5,
+      "line": "4008.00",
+      "start_tt": 50482.41,
+      "end_tt": 51080.55,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1005,
+      "segment": 6,
+      "line": "4007.00",
+      "start_tt": 51260.85,
+      "end_tt": 51848.3,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1005,
+      "segment": 7,
+      "line": "4006.00",
+      "start_tt": 51998.63,
+      "end_tt": 52604.72,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 1005,
+      "segment": 8,
+      "line": "4005.00",
+      "start_tt": 52740.76,
+      "end_tt": 53315.22,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 1005,
+      "segment": 9,
+      "line": "4004.00",
+      "start_tt": 53471.63,
+      "end_tt": 54063.86,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1005,
+      "segment": 10,
+      "line": "4003.00",
+      "start_tt": 54232.63,
+      "end_tt": 54811.78,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1005,
+      "segment": 11,
+      "line": "4002.00",
+      "start_tt": 55006.06,
+      "end_tt": 55605.59,
+      "description": "Perth survey line",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1005,
+      "segment": 12,
+      "line": "1005.02",
+      "start_tt": 55605.59,
+      "end_tt": 56710.0,
+      "description": "Transit to base",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1006,
+      "segment": 1,
+      "line": "1006.01",
+      "start_tt": 46100.0,
+      "end_tt": 47222.0,
+      "description": "Takeoff - Transit to Shawville",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1006,
+      "segment": 2,
+      "line": "1006.02",
+      "start_tt": 47222.0,
+      "end_tt": 48213.0,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 1006,
+      "segment": 3,
+      "line": "1006.03",
+      "start_tt": 48213.0,
+      "end_tt": 49000.0,
+      "description": "Climb to 5182m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1006,
+      "segment": 4,
+      "line": "1006.04",
+      "start_tt": 49000.0,
+      "end_tt": 53286.0,
+      "description": "Shawville calibration at 5182m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1006,
+      "segment": 5,
+      "line": "1006.05",
+      "start_tt": 53286.0,
+      "end_tt": 53855.0,
+      "description": "Descent to 3048m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1006,
+      "segment": 6,
+      "line": "1006.06",
+      "start_tt": 53855.0,
+      "end_tt": 54510.0,
+      "description": "Shawville calibration at 3048m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1006,
+      "segment": 7,
+      "line": "1006.07",
+      "start_tt": 54510.0,
+      "end_tt": 55770.0,
+      "description": "Transit/Descent to Eastern Ontario",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1006,
+      "segment": 8,
+      "line": "1006.08",
+      "start_tt": 55770.0,
+      "end_tt": 56609.0,
+      "description": "Eastern Ontario calibration at 400m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1006,
+      "segment": 9,
+      "line": "1006.09",
+      "start_tt": 56609.0,
+      "end_tt": 57922.0,
+      "description": "Transit to base",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1007,
+      "segment": 1,
+      "line": "1007.01",
+      "start_tt": 47070.0,
+      "end_tt": 48024.0,
+      "description": "Takeoff - Transit to Perth mini-survey area",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1007,
+      "segment": 2,
+      "line": "1007.02",
+      "start_tt": 48024.0,
+      "end_tt": 51880.0,
+      "description": "Perth free-fly at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1007,
+      "segment": 3,
+      "line": "1007.03",
+      "start_tt": 51880.0,
+      "end_tt": 52050.0,
+      "description": "Descent/Transit to 400m in Eastern Ontario",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1007,
+      "segment": 4,
+      "line": "1007.04",
+      "start_tt": 52050.0,
+      "end_tt": 57330.0,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 1007,
+      "segment": 5,
+      "line": "1007.05",
+      "start_tt": 57330.0,
+      "end_tt": 57770.0,
+      "description": "Transit to Renfrew",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1007,
+      "segment": 6,
+      "line": "1007.06",
+      "start_tt": 57770.0,
+      "end_tt": 63010.0,
+      "description": "Renfrew free-fly at 400m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 1007,
+      "segment": 7,
+      "line": "1007.07",
+      "start_tt": 63010.0,
+      "end_tt": 63800.0,
+      "description": "Transit to base",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2001,
+      "segment": 1,
+      "line": "2001.00",
+      "start_tt": 69396.0,
+      "end_tt": 70756.0,
+      "description": "Takeoff - Transit to Shawville",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2001,
+      "segment": 2,
+      "line": "2001.01",
+      "start_tt": 70756.0,
+      "end_tt": 72725.0,
+      "description": "Shawville calibration",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2001,
+      "segment": 3,
+      "line": "2001.02",
+      "start_tt": 72725.0,
+      "end_tt": 72888.0,
+      "description": "Transit to Renfrew",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2001,
+      "segment": 4,
+      "line": "2001.03",
+      "start_tt": 72888.0,
+      "end_tt": 74967.0,
+      "description": "Renfrew free-fly at 3048m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2001,
+      "segment": 5,
+      "line": "2001.04",
+      "start_tt": 74967.0,
+      "end_tt": 76830.0,
+      "description": "Renfrew calibration at 3048m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2001,
+      "segment": 6,
+      "line": "2001.05",
+      "start_tt": 76830.0,
+      "end_tt": 77701.0,
+      "description": "Transit to base",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2002,
+      "segment": 1,
+      "line": "2002.00",
+      "start_tt": 58264.0,
+      "end_tt": 60052.0,
+      "description": "Takeoff - Transit to Kingston",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2002,
+      "segment": 2,
+      "line": "2002.01",
+      "start_tt": 60052.0,
+      "end_tt": 64027.0,
+      "description": "N-S Lake Ontario flight at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2002,
+      "segment": 3,
+      "line": "2002.02",
+      "start_tt": 64815.0,
+      "end_tt": 69090.0,
+      "description": "N-S Lake Ontario flight at 3048m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2002,
+      "segment": 4,
+      "line": "2002.03",
+      "start_tt": 69821.0,
+      "end_tt": 71456.0,
+      "description": "E-W Lake Ontario flight at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2002,
+      "segment": 5,
+      "line": "2002.04",
+      "start_tt": 75192.0,
+      "end_tt": 77484.0,
+      "description": "Transit to base",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2004,
+      "segment": 1,
+      "line": "2001.06",
+      "start_tt": 59168.0,
+      "end_tt": 60641.0,
+      "description": "Takeoff - Transit to Renfrew",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2004,
+      "segment": 2,
+      "line": "2001.07",
+      "start_tt": 60641.0,
+      "end_tt": 61965.0,
+      "description": "Renfrew calibration at 3048m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2004,
+      "segment": 3,
+      "line": "2001.08",
+      "start_tt": 61965.0,
+      "end_tt": 63553.0,
+      "description": "Renfrew calibration at 2000m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2004,
+      "segment": 4,
+      "line": "2001.09",
+      "start_tt": 63553.0,
+      "end_tt": 63672.0,
+      "description": "Descent/Transit to 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2004,
+      "segment": 5,
+      "line": "2001.10",
+      "start_tt": 63672.0,
+      "end_tt": 66797.0,
+      "description": "Renfrew calibration & free-fly at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2004,
+      "segment": 6,
+      "line": "2001.11",
+      "start_tt": 66797.0,
+      "end_tt": 67036.0,
+      "description": "Transit to Eastern Ontario",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2004,
+      "segment": 7,
+      "line": "2001.12",
+      "start_tt": 67036.0,
+      "end_tt": 69719.0,
+      "description": "Eastern Ontario free-fly at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2004,
+      "segment": 8,
+      "line": "2001.13",
+      "start_tt": 69719.0,
+      "end_tt": 71600.0,
+      "description": "Eastern Ontario calibration at 3048m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2004,
+      "segment": 9,
+      "line": "2001.14",
+      "start_tt": 71600.0,
+      "end_tt": 72871.0,
+      "description": "Eastern Ontario calibration at 2000m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2004,
+      "segment": 10,
+      "line": "2001.15",
+      "start_tt": 72871.0,
+      "end_tt": 74070.0,
+      "description": "Eastern Ontario calibration at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2004,
+      "segment": 11,
+      "line": "2001.16",
+      "start_tt": 74070.0,
+      "end_tt": 76137.0,
+      "description": "Eastern Ontario free-fly at 3048m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2004,
+      "segment": 12,
+      "line": "2001.17",
+      "start_tt": 76137.0,
+      "end_tt": 76475.0,
+      "description": "Transit to base",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2005,
+      "segment": 1,
+      "line": "2004.00",
+      "start_tt": 54616.0,
+      "end_tt": 55252.0,
+      "description": "Takeoff - Transit",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2005,
+      "segment": 2,
+      "line": "2004.01",
+      "start_tt": 55252.0,
+      "end_tt": 60613.0,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 2005,
+      "segment": 3,
+      "line": "2004.02",
+      "start_tt": 60613.0,
+      "end_tt": 63359.0,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 2005,
+      "segment": 4,
+      "line": "2004.03",
+      "start_tt": 63359.0,
+      "end_tt": 67236.0,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 2005,
+      "segment": 5,
+      "line": "2004.04",
+      "start_tt": 68559.0,
+      "end_tt": 72394.0,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 2005,
+      "segment": 6,
+      "line": "2004.05",
+      "start_tt": 72394.0,
+      "end_tt": 73414.0,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 2006,
+      "segment": 1,
+      "line": "2003.00",
+      "start_tt": 53987.0,
+      "end_tt": 55210.0,
+      "description": "Takeoff - Transit to Renfrew",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2006,
+      "segment": 2,
+      "line": "2003.01",
+      "start_tt": 55210.0,
+      "end_tt": 66575.0,
+      "description": "18 low altitude calibrations",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2006,
+      "segment": 3,
+      "line": "2004.06",
+      "start_tt": 67565.0,
+      "end_tt": 71317.0,
+      "description": "Perth free-fly at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2006,
+      "segment": 4,
+      "line": "2004.07",
+      "start_tt": 71459.0,
+      "end_tt": 75154.0,
+      "description": "Eastern Ontario free-fly on drape",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2007,
+      "segment": 1,
+      "line": "2005.00",
+      "start_tt": 66530.0,
+      "end_tt": 69686.0,
+      "description": "Takeoff - Transit to Perth mini-survey area",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2007,
+      "segment": 2,
+      "line": "2005.01",
+      "start_tt": 69686.9,
+      "end_tt": 70398.7,
+      "description": "Perth line 4004.0 on drape",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2007,
+      "segment": 3,
+      "line": "2005.02",
+      "start_tt": 70399.0,
+      "end_tt": 70508.0,
+      "description": "Transit to line 4008.0",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2007,
+      "segment": 4,
+      "line": "2005.03",
+      "start_tt": 70508.5,
+      "end_tt": 71240.5,
+      "description": "Perth line 4008.0 on drape",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2007,
+      "segment": 5,
+      "line": "2005.04",
+      "start_tt": 71241.0,
+      "end_tt": 72980.0,
+      "description": "Transit to line 405.0",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2007,
+      "segment": 6,
+      "line": "2005.05",
+      "start_tt": 72980.5,
+      "end_tt": 73183.5,
+      "description": "Perth line 405.0 on drape",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2007,
+      "segment": 7,
+      "line": "2005.06",
+      "start_tt": 73184.0,
+      "end_tt": 73662.0,
+      "description": "Transit to line 415.0",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2007,
+      "segment": 8,
+      "line": "2005.07",
+      "start_tt": 73662.5,
+      "end_tt": 73891.4,
+      "description": "Perth line 415.0 on drape",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2007,
+      "segment": 9,
+      "line": "2005.08",
+      "start_tt": 73892.0,
+      "end_tt": 74996.0,
+      "description": "Transit to base",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2008,
+      "segment": 1,
+      "line": "2001.18",
+      "start_tt": 55255.0,
+      "end_tt": 56611.0,
+      "description": "Takeoff - Transit to Shawville",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2008,
+      "segment": 2,
+      "line": "2001.19",
+      "start_tt": 56612.0,
+      "end_tt": 57363.0,
+      "description": "Shawville calibration box 1 started & aborted",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2008,
+      "segment": 3,
+      "line": "2001.20",
+      "start_tt": 57363.0,
+      "end_tt": 57903.2,
+      "description": "Shawville calibration box 1 redone",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2008,
+      "segment": 4,
+      "line": "2001.21",
+      "start_tt": 57904.0,
+      "end_tt": 57931.0,
+      "description": "Setup for Shawville calibration box 2",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2008,
+      "segment": 5,
+      "line": "2001.22",
+      "start_tt": 57931.0,
+      "end_tt": 58445.4,
+      "description": "Shawville calibration box 2",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2008,
+      "segment": 6,
+      "line": "2005.23",
+      "start_tt": 58446.0,
+      "end_tt": 59894.0,
+      "description": "Transit to Renfrew",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2008,
+      "segment": 7,
+      "line": "2005.24",
+      "start_tt": 59894.0,
+      "end_tt": 60359.0,
+      "description": "Loop - large laser differences",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2008,
+      "segment": 8,
+      "line": "2005.25",
+      "start_tt": 60359.0,
+      "end_tt": 62420.0,
+      "description": "Renfrew line 1002.16 on drape",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2008,
+      "segment": 9,
+      "line": "2005.26",
+      "start_tt": 62420.0,
+      "end_tt": 63901.0,
+      "description": "Transit to base",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2015,
+      "segment": 1,
+      "line": "2003.02",
+      "start_tt": 53118.0,
+      "end_tt": 54666.0,
+      "description": "Takeoff - Transit to Eastern Ontario",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2015,
+      "segment": 2,
+      "line": "2003.03",
+      "start_tt": 54676.0,
+      "end_tt": 66250.0,
+      "description": "18 high altitude calibrations",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2015,
+      "segment": 3,
+      "line": "2005.09",
+      "start_tt": 66250.0,
+      "end_tt": 67613.0,
+      "description": "Transit to Perth mini-survey area",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2015,
+      "segment": 4,
+      "line": "2005.10",
+      "start_tt": 67614.0,
+      "end_tt": 67791.3,
+      "description": "Perth line 415.0 at 2000m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2015,
+      "segment": 5,
+      "line": "2005.11",
+      "start_tt": 67792.0,
+      "end_tt": 68253.0,
+      "description": "Transit to line 4004.0",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2015,
+      "segment": 6,
+      "line": "2005.12",
+      "start_tt": 68253.6,
+      "end_tt": 68831.2,
+      "description": "Perth line 4004.0 at 2000m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2015,
+      "segment": 7,
+      "line": "2005.13",
+      "start_tt": 68832.0,
+      "end_tt": 69296.0,
+      "description": "Transit to line 405.0",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2015,
+      "segment": 8,
+      "line": "2005.14",
+      "start_tt": 69296.2,
+      "end_tt": 69489.7,
+      "description": "Perth line 405.0 at 2000m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2015,
+      "segment": 9,
+      "line": "2005.15",
+      "start_tt": 69490.0,
+      "end_tt": 69919.0,
+      "description": "Transit to line 4008.0",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2015,
+      "segment": 10,
+      "line": "2005.16",
+      "start_tt": 69919.3,
+      "end_tt": 70667.6,
+      "description": "Perth line 4008.0 at 2000m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2015,
+      "segment": 11,
+      "line": "2005.17",
+      "start_tt": 70668.0,
+      "end_tt": 70719.0,
+      "description": "Transit to line 1007.02",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2015,
+      "segment": 12,
+      "line": "2005.18",
+      "start_tt": 70719.9,
+      "end_tt": 75197.3,
+      "description": "Perth line 1007.02 at 2000m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2015,
+      "segment": 13,
+      "line": "2005.19",
+      "start_tt": 75198.0,
+      "end_tt": 76369.0,
+      "description": "Transit to base",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2016,
+      "segment": 1,
+      "line": "2005.27",
+      "start_tt": 55629.0,
+      "end_tt": 56773.0,
+      "description": "Takeoff - Transit to Perth mini-survey area",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2016,
+      "segment": 2,
+      "line": "2005.28",
+      "start_tt": 56773.8,
+      "end_tt": 57021.9,
+      "description": "Perth line 415.0 at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2016,
+      "segment": 3,
+      "line": "2005.29",
+      "start_tt": 57022.0,
+      "end_tt": 57580.0,
+      "description": "Transit to line 4004.0",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2016,
+      "segment": 4,
+      "line": "2005.30",
+      "start_tt": 57580.2,
+      "end_tt": 58232.1,
+      "description": "Perth line 4004.0 at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2016,
+      "segment": 5,
+      "line": "2005.31",
+      "start_tt": 58233.0,
+      "end_tt": 58619.0,
+      "description": "Transit to line 405.0",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2016,
+      "segment": 6,
+      "line": "2005.32",
+      "start_tt": 58619.8,
+      "end_tt": 58797.2,
+      "description": "Perth line 405.0 at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2016,
+      "segment": 7,
+      "line": "2005.33",
+      "start_tt": 58798.0,
+      "end_tt": 59162.0,
+      "description": "Transit to line 4008.0",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2016,
+      "segment": 8,
+      "line": "2005.34",
+      "start_tt": 59162.2,
+      "end_tt": 59905.4,
+      "description": "Perth line 4008.0 at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2016,
+      "segment": 9,
+      "line": "2005.35",
+      "start_tt": 59906.0,
+      "end_tt": 60277.0,
+      "description": "Transit to line 1007.02",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2016,
+      "segment": 10,
+      "line": "2005.36",
+      "start_tt": 60277.0,
+      "end_tt": 64672.0,
+      "description": "Perth line 1007.02 at 800m",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2016,
+      "segment": 11,
+      "line": "2005.37",
+      "start_tt": 64673.0,
+      "end_tt": 64918.0,
+      "description": "Transit to drape",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2016,
+      "segment": 12,
+      "line": "2005.38",
+      "start_tt": 64919.0,
+      "end_tt": 69596.0,
+      "description": "Perth line 1007.02 on drape",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2016,
+      "segment": 13,
+      "line": "2005.39",
+      "start_tt": 69596.0,
+      "end_tt": 71897.0,
+      "description": "Transit to base",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2017,
+      "segment": 1,
+      "line": "2005.20",
+      "start_tt": 54262.0,
+      "end_tt": 56122.0,
+      "description": "Takeoff - Transit",
+      "split": "train",
+      "released": true
+    },
+    {
+      "flight": 2017,
+      "segment": 2,
+      "line": "2005.21",
+      "start_tt": 56122.0,
+      "end_tt": 56375.0,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    },
+    {
+      "flight": 2017,
+      "segment": 3,
+      "line": "2005.22",
+      "start_tt": 56375.0,
+      "end_tt": 58092.0,
+      "description": "HOLD-OUT TESTING DATA",
+      "split": "holdout",
+      "released": false
+    }
+  ],
+  "sources": {
+    "data_release": "https://zenodo.org/records/12723700",
+    "release_metadata": "https://zenodo.org/records/12723700",
+    "upstream_repository": "https://github.com/MIT-AI-Accelerator/MagNav.jl",
+    "upstream_revision": "b79a9ceed6009878f47c72938718f96ce067d803",
+    "mag_nav_readmes": "https://github.com/MIT-AI-Accelerator/MagNav.jl/tree/b79a9ceed6009878f47c72938718f96ce067d803/readmes",
+    "fields_2020": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt",
+    "fields_2021": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt",
+    "datasheet_2020": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/datasheet_sgl_2020_train.pdf",
+    "datasheet_2021": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/datasheet_sgl_2021_train.pdf"
+  },
+  "sensor_layout": [
+    {
+      "collection": "2020",
+      "sensor": "Mag 1",
+      "description": "Tail stinger",
+      "x": -12.01,
+      "y": 0.0,
+      "z": 1.37,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "collection": "2020",
+      "sensor": "Mag 2",
+      "description": "Front cabin, aft of cockpit",
+      "x": -0.6,
+      "y": -0.36,
+      "z": 0.0,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "collection": "2020",
+      "sensor": "Mag 3",
+      "description": "Mid cabin, near INS",
+      "x": -1.28,
+      "y": -0.36,
+      "z": 0.0,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "collection": "2020",
+      "sensor": "Mag 4",
+      "description": "Rear cabin, floor",
+      "x": -3.53,
+      "y": 0.0,
+      "z": 0.0,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "collection": "2020",
+      "sensor": "Mag 5",
+      "description": "Rear cabin, ceiling",
+      "x": -3.79,
+      "y": 0.0,
+      "z": 1.2,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "collection": "2020",
+      "sensor": "Flux A",
+      "description": "Mid cabin, near fuel tank",
+      "x": -3.27,
+      "y": -0.6,
+      "z": 0.0,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "collection": "2020",
+      "sensor": "Flux B",
+      "description": "Tail, base of stinger",
+      "x": -8.92,
+      "y": 0.0,
+      "z": 0.96,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "collection": "2020",
+      "sensor": "Flux C",
+      "description": "Rear cabin, port",
+      "x": -4.06,
+      "y": 0.42,
+      "z": 0.0,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "collection": "2020",
+      "sensor": "Flux D",
+      "description": "Rear cabin, starboard",
+      "x": -4.06,
+      "y": -0.42,
+      "z": 0.0,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2020_fields_readme.txt"
+    },
+    {
+      "collection": "2021",
+      "sensor": "Mag 1",
+      "description": "Tail stinger",
+      "x": -12.01,
+      "y": 0.0,
+      "z": 1.37,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "collection": "2021",
+      "sensor": "Mag 2",
+      "description": "Front cabin, aft of cockpit",
+      "x": -0.6,
+      "y": -0.36,
+      "z": 0.0,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "collection": "2021",
+      "sensor": "Mag 3",
+      "description": "Mid cabin, near INS",
+      "x": -1.28,
+      "y": -0.36,
+      "z": 0.0,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "collection": "2021",
+      "sensor": "Mag 4",
+      "description": "Rear cabin, floor",
+      "x": -3.53,
+      "y": 0.0,
+      "z": 0.0,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "collection": "2021",
+      "sensor": "Mag 5",
+      "description": "Rear cabin, ceiling",
+      "x": -3.79,
+      "y": 0.0,
+      "z": 1.2,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "collection": "2021",
+      "sensor": "Flux A",
+      "description": "Mid cabin, near fuel tank",
+      "x": -3.27,
+      "y": -0.6,
+      "z": 0.0,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "collection": "2021",
+      "sensor": "Flux B",
+      "description": "Tail, base of stinger",
+      "x": -8.92,
+      "y": 0.0,
+      "z": 0.96,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "collection": "2021",
+      "sensor": "Flux C",
+      "description": "Rear cabin, port",
+      "x": -4.06,
+      "y": 0.42,
+      "z": 0.0,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    },
+    {
+      "collection": "2021",
+      "sensor": "Flux D",
+      "description": "Rear cabin, starboard",
+      "x": -4.06,
+      "y": -0.42,
+      "z": 0.0,
+      "source_url": "https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/sgl_2021_fields_readme.txt"
+    }
+  ]
+}
