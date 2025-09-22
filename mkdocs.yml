@@ -1,0 +1,73 @@
+site_name: DAF-MIT AeroMag
+site_description: A Python interface to the DAF-MIT AIA open flight dataset for aircraft magnetic interference compensation and MagNav research.
+site_url: https://dyuu7.github.io/dafmit-aeromag/
+repo_url: https://github.com/dyuu7/dafmit-aeromag
+repo_name: dyuu7/dafmit-aeromag
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Use dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Use light mode
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: false
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: zh
+          name: 简体中文
+          build: true
+          nav_translations:
+            Home: 首页
+            Quickstart: 快速开始
+            Data model: 数据模型
+            API: API
+            Provenance and terms: 数据来源与使用条款
+            Migration: 迁移指南
+            Maintenance: 维护
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: numpy
+            show_source: false
+            members_order: source
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Data model: data-model.md
+  - API: api.md
+  - Provenance and terms: provenance-and-terms.md
+  - Migration: migration.md
+  - Maintenance: maintenance.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - tables
+
+strict: true

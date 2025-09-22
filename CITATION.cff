@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the software and the source data."
+title: "DAF-MIT AeroMag"
+version: "0.3.0"
+type: software
+authors:
+  - name: "dyuu7"
+repository-code: "https://github.com/dyuu7/dafmit-aeromag"
+url: "https://dyuu7.github.io/dafmit-aeromag/"
+license: MIT
+references:
+  - type: dataset
+    title: "DAF-MIT AIA Open Flight Data for Magnetic Navigation Research"
+    doi: "10.5281/zenodo.12723700"
+    url: "https://zenodo.org/records/12723700"

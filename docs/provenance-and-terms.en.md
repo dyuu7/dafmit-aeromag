@@ -1,0 +1,9 @@
+# Provenance and Terms
+
+The v3 catalog is generated from the Zenodo record [`12723700`](https://zenodo.org/records/12723700), whose concept record is [`10.5281/zenodo.4271803`](https://doi.org/10.5281/zenodo.4271803). Zenodo is authoritative for the released HDF5 payloads, checksums, and release scope. The upstream [MagNav.jl repository](https://github.com/MIT-AI-Accelerator/MagNav.jl) provides the reference software and metadata context; this project pins its readme reference to commit [`b79a9ceed600`](https://github.com/MIT-AI-Accelerator/MagNav.jl/commit/b79a9ceed6009878f47c72938718f96ce067d803).
+
+The checked-in catalog contains URLs, checksums, sizes, flight dates, field descriptions, field-specific notes, sensor positions, and segment metadata. It does not contain the HDF5 payloads. The updater fetches the Zenodo API record and the two small readme archives; it never needs to download training files. The generated field and flight metadata retains links to the upstream readmes instead of copying them into this repository.
+
+The Zenodo v3 readme snapshot is the primary semantic reference for this catalog. The pinned upstream readmes provide a stable, human-readable reference and are used by the maintenance fallback; newer upstream changes do not silently rewrite this catalog. The research data has a separate [Data Sharing Agreement](https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/DATA_SHARING_AGREEMENT.md). That agreement governs use of the data and is not replaced by this project's MIT code license. In particular, review its restrictions before publishing data-derived artifacts or redistributing downloaded files.
+
+This repository does not claim ownership of the source data. The checked-in catalog is a derived artifact, while field groups and reader behavior are this package's interface layer. Citation and attribution should point to the Zenodo record and the original project.
