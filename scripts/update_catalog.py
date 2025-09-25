@@ -157,9 +157,7 @@ def parse_field_notes(
     marker = "Notes on specific flight data fields:"
     if marker not in text:
         return {}
-    section = text.split(marker, 1)[1].split(
-        "Magnetometer/Fluxgate positions", 1
-    )[0]
+    section = text.split(marker, 1)[1].split("Magnetometer/Fluxgate positions", 1)[0]
     notes: dict[str, list[str]] = {}
     current: tuple[str, ...] = ()
     for raw_line in section.splitlines():
@@ -173,9 +171,7 @@ def parse_field_notes(
                     notes.setdefault(name, []).append(value)
             continue
         names = tuple(
-            part.strip()
-            for part in re.split(r"\s*(?:,|&)\s*", line)
-            if part.strip()
+            part.strip() for part in re.split(r"\s*(?:,|&)\s*", line) if part.strip()
         )
         if names and all(name in field_names for name in names):
             current = names
@@ -401,12 +397,9 @@ def build_catalog(record_id: int) -> dict[str, Any]:
         "fields": [
             {
                 **field,
-                "notes": field_notes.get(
-                    (field["collection"], field["name"]), []
-                ),
+                "notes": field_notes.get((field["collection"], field["name"]), []),
                 "source_url": (
-                    f"{_UPSTREAM_READMES}/sgl_"
-                    f"{field['collection']}_fields_readme.txt"
+                    f"{_UPSTREAM_READMES}/sgl_{field['collection']}_fields_readme.txt"
                 ),
             }
             for collection in ("2020", "2021")
@@ -492,8 +485,7 @@ def build_catalog_from_existing(base_path: Path) -> dict[str, Any]:
                 **field,
                 "notes": field_notes.get((field["collection"], field["name"]), []),
                 "source_url": (
-                    f"{_UPSTREAM_READMES}/sgl_{field['collection']}"
-                    "_fields_readme.txt"
+                    f"{_UPSTREAM_READMES}/sgl_{field['collection']}_fields_readme.txt"
                 ),
             }
             for collection in ("2020", "2021")

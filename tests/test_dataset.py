@@ -43,9 +43,7 @@ def test_catalog_is_versioned_and_keeps_duplicate_segments(synthetic_dataset) ->
     assert "flux_a_x" in synthetic_dataset.field_names("fluxgate", flight=2005)
     assert synthetic_dataset.sensors("2020").shape[0] == 9
     sources = synthetic_dataset.catalog.metadata["sources"]
-    assert sources["upstream_revision"] == (
-        "b79a9ceed6009878f47c72938718f96ce067d803"
-    )
+    assert sources["upstream_revision"] == ("b79a9ceed6009878f47c72938718f96ce067d803")
     assert "master" not in sources["mag_nav_readmes"]
 
 
