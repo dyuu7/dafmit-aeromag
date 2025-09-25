@@ -93,6 +93,8 @@ def _normalise_time(value: slice | None) -> slice | None:
             stop = pd.Timestamp(value.stop)
         except (TypeError, ValueError, OverflowError) as exc:
             raise InvalidSelectionError("time bounds must be valid timestamps") from exc
+        if not isinstance(start, pd.Timestamp) or not isinstance(stop, pd.Timestamp):
+            raise InvalidSelectionError("time bounds must be valid timestamps")
         if start.tzinfo is None:
             start = start.tz_localize("UTC")
         else:

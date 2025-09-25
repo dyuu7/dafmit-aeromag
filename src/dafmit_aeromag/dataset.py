@@ -649,7 +649,7 @@ class Dataset:
                     data[name] = self._read_runs(handle, name, runs, missing=missing)
             ordered = ["flight", "line", "year", "doy", "tt", "time"]
             ordered.extend(name for name in columns if name not in _IDENTITY_COLUMNS)
-            return pd.DataFrame(data, columns=ordered)
+            return pd.DataFrame(data, columns=pd.Index(ordered))
 
     def to_xarray(self, frame: pd.DataFrame) -> Any:
         """Convert a DataFrame returned by :meth:`read` to an xarray Dataset."""

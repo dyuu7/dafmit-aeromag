@@ -34,6 +34,15 @@ def test_selection_rejects_step_and_reversed_slices() -> None:
         Selection(1002, time=slice("2020-01-02", "2020-01-01"))
 
 
+@pytest.mark.parametrize(
+    "value",
+    [slice("NaT", "2020-01-02"), slice("2020-01-01", "NaT")],
+)
+def test_selection_rejects_nat_time_bounds(value: slice) -> None:
+    with pytest.raises(InvalidSelectionError, match="valid timestamps"):
+        Selection(1002, time=value)
+
+
 @pytest.mark.parametrize("bound", [np.nan, np.inf, -np.inf])
 def test_selection_rejects_nonfinite_tt_bounds(bound: float) -> None:
     with pytest.raises(InvalidSelectionError, match="finite"):

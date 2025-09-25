@@ -158,7 +158,7 @@ class Catalog:
         else:
             flight_collection = self.require_flight(flight)["collection"]
             if collection is not None and collection != flight_collection:
-                return pd.DataFrame(columns=[*columns, "available"])
+                return pd.DataFrame(columns=pd.Index([*columns, "available"]))
             rows = [
                 {
                     **self._field_row(item),
@@ -171,7 +171,7 @@ class Catalog:
         if group is not None:
             rows = [item for item in rows if item["group"] == group]
         output_columns = [*columns, "available"] if flight is not None else columns
-        return pd.DataFrame(rows, columns=output_columns)
+        return pd.DataFrame(rows, columns=pd.Index(output_columns))
 
     @staticmethod
     def _validate_collection(collection: str | None) -> None:
@@ -237,7 +237,7 @@ class Catalog:
             "z",
             "source_url",
         ]
-        return pd.DataFrame(rows, columns=columns)
+        return pd.DataFrame(rows, columns=pd.Index(columns))
 
     def segments_frame(
         self,
@@ -279,7 +279,7 @@ class Catalog:
             "split",
             "released",
         ]
-        return pd.DataFrame(rows, columns=columns)
+        return pd.DataFrame(rows, columns=pd.Index(columns))
 
     def holdout_intervals(self, flight: int) -> tuple[tuple[float, float], ...]:
         """Return native-time intervals that are marked as unreleased."""
