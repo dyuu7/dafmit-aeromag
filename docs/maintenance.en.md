@@ -37,4 +37,4 @@ The weekly `upstream.yml` workflow follows the concept DOI and opens or updates 
 1. Run the full test, lint, type-check, documentation, and package-build jobs.
 2. Review provenance and data-license links.
 3. Update the catalog and changelog notes if the release intentionally changes data coverage.
-4. Create a `vX.Y.Z` tag and publish through the trusted PyPI workflow.
+4. Create a `vX.Y.Z` tag. The publish workflow creates the matching GitHub Release with the built distributions and publishes the same files through PyPI Trusted Publishing.

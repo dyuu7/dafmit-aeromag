@@ -6,10 +6,9 @@ on:
 
 permissions:
   contents: read
-  id-token: write
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -22,5 +21,49 @@ jobs:
         run: uv sync --frozen
       - name: Build distributions
         run: uv run python -m build
+      - name: Store distributions
+        uses: actions/upload-artifact@v7
+        with:
+          name: python-distributions
+          path: dist/
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Retrieve distributions
+        uses: actions/download-artifact@v8
+        with:
+          name: python-distributions
+          path: dist/
+      - name: Create or update GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" dist/* \
+              --repo "$GITHUB_REPOSITORY" \
+              --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" dist/* \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "$GITHUB_REF_NAME" \
+              --generate-notes \
+              --verify-tag
+          fi
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Retrieve distributions
+        uses: actions/download-artifact@v8
+        with:
+          name: python-distributions
+          path: dist/
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1

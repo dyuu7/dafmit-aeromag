@@ -37,4 +37,4 @@ uv run python scripts/check_i18n.py
 1. 运行完整的测试、lint、类型检查、文档构建和包构建任务。
 2. 检查数据来源和数据许可链接。
 3. 如果发布版本有意改变数据覆盖范围，更新目录和 changelog 说明。
-4. 创建 `vX.Y.Z` 标签，并通过受信任的 PyPI 工作流发布。
+4. 创建 `vX.Y.Z` 标签。发布工作流会创建对应的 GitHub Release 并附加构建产物，同时通过 PyPI Trusted Publishing 发布同一批文件。
