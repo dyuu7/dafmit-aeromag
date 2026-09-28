@@ -14,15 +14,15 @@ class UnknownFlightError(DatasetError):
 
 
 class UnknownFieldError(DatasetError):
-    """A requested field is not described by the selected release."""
+    """A field is absent from both the catalog and the selected files."""
 
 
 class MissingFieldError(DatasetError):
     """A known field is unavailable in one or more selected flight files."""
 
 
-class InvalidSelectionError(DatasetError):
-    """A selection contains an unsupported or contradictory constraint."""
+class InvalidArgumentError(DatasetError, ValueError):
+    """An argument has an invalid type, value, or combination of constraints."""
 
 
 class DataIntegrityError(DatasetError):

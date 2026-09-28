@@ -1,25 +1,29 @@
 """Access to the open MIT-AI-Accelerator flight data releases."""
 
+from .conversion import to_xarray
 from .dataset import Dataset
 from .exceptions import (
     DataIntegrityError,
     DatasetError,
     DataUnavailableError,
-    InvalidSelectionError,
+    InvalidArgumentError,
     MissingFieldError,
     NoDataError,
     UnknownFieldError,
     UnknownFlightError,
     UnknownReleaseError,
 )
+from .reader import FlightInfo
 from .selection import Selection
 
 __all__ = [
     "DataIntegrityError",
     "DataUnavailableError",
     "Dataset",
+    "FlightInfo",
+    "to_xarray",
     "DatasetError",
-    "InvalidSelectionError",
+    "InvalidArgumentError",
     "MissingFieldError",
     "NoDataError",
     "Selection",
@@ -28,4 +32,4 @@ __all__ = [
     "UnknownReleaseError",
 ]
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"

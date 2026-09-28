@@ -1,6 +1,6 @@
 [project]
 name = "dafmit-aeromag"
-version = "0.3.0"
+version = "0.4.0"
 description = "A Python interface to the DAF-MIT AIA open flight dataset for aircraft magnetic interference compensation and MagNav research."
 requires-python = ">=3.10"
 dependencies = [
@@ -84,7 +84,7 @@ default-groups = ["dev"]
 
 [tool.pytest.ini_options]
 addopts = "--strict-markers"
-markers = ["integration: downloads the smallest real Zenodo flight file"]
+markers = ["integration: verifies real Zenodo flight files from both collections"]
 pythonpath = ["."]
 testpaths = ["tests"]
 

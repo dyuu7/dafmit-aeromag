@@ -237,7 +237,7 @@ def parse_flight_readme(text: str, flight: int) -> tuple[str, list[dict[str, Any
             continue
         start, stop, line, description = match.groups()
         lowered = description.lower()
-        split = "holdout" if "hold-out" in lowered or "holdout" in lowered else "train"
+        is_holdout = "hold-out" in lowered or "holdout" in lowered
         segments.append(
             {
                 "flight": flight,
@@ -246,8 +246,7 @@ def parse_flight_readme(text: str, flight: int) -> tuple[str, list[dict[str, Any
                 "start_tt": float(start),
                 "end_tt": float(stop),
                 "description": description.strip(),
-                "split": split,
-                "released": split == "train",
+                "is_holdout": is_holdout,
             }
         )
     if not segments:
@@ -294,97 +293,64 @@ def _find_readme_zip(record: dict[str, Any], collection: str) -> str:
     raise ValueError(f"could not find {collection} readme archive")
 
 
-def build_catalog(record_id: int) -> dict[str, Any]:
-    record = _get_json(f"{_ZENODO_API}/{record_id}")
-    metadata = record.get("metadata", {})
-    files = _file_metadata(record)
-    archives: dict[str, dict[str, str]] = {}
-    readmes: dict[str, str] = {}
-    field_notes: dict[tuple[str, str], list[str]] = {}
-    sensor_layout: list[dict[str, Any]] = []
-    for collection in ("2020", "2021"):
-        archive = _read_zip(_get_bytes(_find_readme_zip(record, collection)))
-        archives[collection] = archive
-        field_name = f"sgl_{collection}_fields_readme.txt"
-        field_text = next(
-            (
-                text
-                for name, text in archive.items()
-                if name.lower() == field_name.lower()
-            ),
-            None,
+def _readme(archive: dict[str, str], name: str) -> str:
+    for filename, text in archive.items():
+        if Path(filename).name.lower() == name.lower():
+            return text
+    raise ValueError(f"missing {name} in readme archive")
+
+
+def _assemble_catalog(
+    metadata: dict[str, Any],
+    files: dict[int, dict[str, Any]],
+    archives: dict[str, dict[str, str]],
+) -> dict[str, Any]:
+    """Interpret source texts once, regardless of their acquisition path."""
+    fields: list[dict[str, Any]] = []
+    sensors: list[dict[str, Any]] = []
+    for collection, archive in archives.items():
+        filename = f"sgl_{collection}_fields_readme.txt"
+        text = _readme(archive, filename)
+        definitions = parse_fields(text, collection)
+        notes = parse_field_notes(
+            text, collection, {row["name"] for row in definitions}
         )
-        if field_text is None:
-            raise ValueError(f"missing {field_name} in readme archive")
-        readmes[collection] = field_text
-        parsed_fields = parse_fields(field_text, collection)
-        names = {item["name"] for item in parsed_fields}
-        field_notes.update(
-            {
-                (collection, name): values
-                for name, values in parse_field_notes(
-                    field_text, collection, names
-                ).items()
-            }
+        source_url = f"{_UPSTREAM_READMES}/{filename}"
+        fields.extend(
+            {**row, "notes": notes.get(row["name"], []), "source_url": source_url}
+            for row in definitions
         )
-        sensor_source_url = f"{_UPSTREAM_READMES}/{field_name}"
-        sensor_layout.extend(
-            {
-                **row,
-                "source_url": sensor_source_url,
-            }
-            for row in parse_sensor_layout(field_text, collection)
+        sensors.extend(
+            {**row, "source_url": source_url}
+            for row in parse_sensor_layout(text, collection)
         )
 
     flights: list[dict[str, Any]] = []
     segments: list[dict[str, Any]] = []
-    for flight in sorted(files):
+    for flight, file in sorted(files.items()):
         collection = "2020" if flight < 2000 else "2021"
-        archive = archives[collection]
-        stem = f"Flt{flight}_readme.txt"
-        text = next(
-            (
-                value
-                for name, value in archive.items()
-                if Path(name).name.lower() == stem.lower()
-            ),
-            None,
-        )
-        if text is None:
-            raise ValueError(f"missing {stem} in {collection} readme archive")
+        filename = f"Flt{flight}_readme.txt"
+        text = _readme(archives[collection], filename)
         date, flight_segments = parse_flight_readme(text, flight)
-        flight_notes = parse_flight_notes(text)
+        source_url = f"{_UPSTREAM_READMES}/{filename}"
         flights.append(
             {
                 "flight": flight,
                 "collection": collection,
                 "date": date,
-                "file": files[flight]["file"],
-                "url": files[flight]["url"],
-                "size_bytes": files[flight]["size_bytes"],
-                "checksum": files[flight]["checksum"],
+                **{key: file[key] for key in ("file", "url", "size_bytes", "checksum")},
                 "dt": 0.1,
-                "has_holdout": any(
-                    row["split"] == "holdout" for row in flight_segments
-                ),
-                "notes": flight_notes,
-                "source_url": f"{_UPSTREAM_READMES}/Flt{flight}_readme.txt",
+                "notes": parse_flight_notes(text),
+                "source_url": source_url,
             }
         )
-        segments.extend(flight_segments)
+        segments.extend({**row, "source_url": source_url} for row in flight_segments)
 
     return {
-        "release": "v3",
-        "record_id": int(record["id"]),
-        "version": metadata.get("version", "3"),
-        "doi": metadata.get("doi", "10.5281/zenodo.12723700"),
-        "concept_doi": metadata.get("conceptdoi", "10.5281/zenodo.4271803"),
-        "title": metadata.get("title", "DAF-MIT AIA Open Flight Data"),
-        "source_url": f"https://zenodo.org/records/{record['id']}",
-        "generated_from": f"{_ZENODO_API}/{record['id']}",
+        **metadata,
         "sources": {
-            "data_release": f"https://zenodo.org/records/{record['id']}",
-            "release_metadata": f"https://zenodo.org/records/{record['id']}",
+            "data_release": metadata["source_url"],
+            "release_metadata": metadata["source_url"],
             "upstream_repository": _UPSTREAM_REPOSITORY,
             "upstream_revision": _UPSTREAM_REVISION,
             "mag_nav_readmes": _UPSTREAM_READMES_TREE,
@@ -394,106 +360,50 @@ def build_catalog(record_id: int) -> dict[str, Any]:
             "datasheet_2021": f"{_UPSTREAM_READMES}/datasheet_sgl_2021_train.pdf",
         },
         "flights": flights,
-        "fields": [
-            {
-                **field,
-                "notes": field_notes.get((field["collection"], field["name"]), []),
-                "source_url": (
-                    f"{_UPSTREAM_READMES}/sgl_{field['collection']}_fields_readme.txt"
-                ),
-            }
-            for collection in ("2020", "2021")
-            for field in parse_fields(readmes[collection], collection)
-        ],
-        "sensor_layout": sensor_layout,
+        "fields": fields,
+        "sensor_layout": sensors,
         "segments": segments,
     }
+
+
+def build_catalog(record_id: int) -> dict[str, Any]:
+    record = _get_json(f"{_ZENODO_API}/{record_id}")
+    upstream = record.get("metadata", {})
+    metadata = {
+        "release": "v3",
+        "record_id": int(record["id"]),
+        "version": upstream.get("version", "3"),
+        "doi": upstream.get("doi", "10.5281/zenodo.12723700"),
+        "concept_doi": upstream.get("conceptdoi", "10.5281/zenodo.4271803"),
+        "title": upstream.get("title", "DAF-MIT AIA Open Flight Data"),
+        "source_url": f"https://zenodo.org/records/{record['id']}",
+        "generated_from": f"{_ZENODO_API}/{record['id']}",
+    }
+    archives = {
+        collection: _read_zip(_get_bytes(_find_readme_zip(record, collection)))
+        for collection in ("2020", "2021")
+    }
+    return _assemble_catalog(metadata, _file_metadata(record), archives)
 
 
 def build_catalog_from_existing(base_path: Path) -> dict[str, Any]:
-    """Refresh metadata from upstream readmes using an existing file manifest.
-
-    This path is useful when the Zenodo API is temporarily unavailable. The
-    checked-in catalog remains the source for file URLs, sizes, and checksums;
-    field definitions and flight notes still come from upstream readmes.
-    """
-
+    """Keep published file identities, refreshing texts from the pinned revision."""
     base = json.loads(base_path.read_text(encoding="utf-8"))
-    readmes = {
-        collection: _get_text(
-            f"{_UPSTREAM_RAW_READMES}/sgl_{collection}_fields_readme.txt"
+    tables = {"flights", "fields", "segments", "sensor_layout", "sources"}
+    metadata = {key: value for key, value in base.items() if key not in tables}
+    files = {int(item["flight"]): item for item in base["flights"]}
+    archives = {}
+    for collection in ("2020", "2021"):
+        names = [f"sgl_{collection}_fields_readme.txt"]
+        names.extend(
+            f"Flt{flight}_readme.txt"
+            for flight in files
+            if ("2020" if flight < 2000 else "2021") == collection
         )
-        for collection in ("2020", "2021")
-    }
-    parsed_fields = {
-        collection: parse_fields(text, collection)
-        for collection, text in readmes.items()
-    }
-    field_notes = {
-        (collection, name): values
-        for collection, text in readmes.items()
-        for name, values in parse_field_notes(
-            text,
-            collection,
-            {item["name"] for item in parsed_fields[collection]},
-        ).items()
-    }
-    sensor_layout = [
-        {
-            **row,
-            "source_url": f"{_UPSTREAM_READMES}/sgl_{collection}_fields_readme.txt",
+        archives[collection] = {
+            name: _get_text(f"{_UPSTREAM_RAW_READMES}/{name}") for name in names
         }
-        for collection, text in readmes.items()
-        for row in parse_sensor_layout(text, collection)
-    ]
-
-    flights: list[dict[str, Any]] = []
-    segments: list[dict[str, Any]] = []
-    for item in base["flights"]:
-        flight = int(item["flight"])
-        text = _get_text(f"{_UPSTREAM_RAW_READMES}/Flt{flight}_readme.txt")
-        date, flight_segments = parse_flight_readme(text, flight)
-        flights.append(
-            {
-                **item,
-                "date": date,
-                "has_holdout": any(
-                    row["split"] == "holdout" for row in flight_segments
-                ),
-                "notes": parse_flight_notes(text),
-                "source_url": f"{_UPSTREAM_READMES}/Flt{flight}_readme.txt",
-            }
-        )
-        segments.extend(flight_segments)
-
-    return {
-        **base,
-        "sources": {
-            "data_release": base["source_url"],
-            "release_metadata": base["source_url"],
-            "upstream_repository": _UPSTREAM_REPOSITORY,
-            "upstream_revision": _UPSTREAM_REVISION,
-            "mag_nav_readmes": _UPSTREAM_READMES_TREE,
-            "fields_2020": f"{_UPSTREAM_READMES}/sgl_2020_fields_readme.txt",
-            "fields_2021": f"{_UPSTREAM_READMES}/sgl_2021_fields_readme.txt",
-            "datasheet_2020": f"{_UPSTREAM_READMES}/datasheet_sgl_2020_train.pdf",
-            "datasheet_2021": f"{_UPSTREAM_READMES}/datasheet_sgl_2021_train.pdf",
-        },
-        "flights": flights,
-        "fields": [
-            {
-                **field,
-                "notes": field_notes.get((field["collection"], field["name"]), []),
-                "source_url": (
-                    f"{_UPSTREAM_READMES}/sgl_{field['collection']}_fields_readme.txt"
-                ),
-            }
-            for collection in ("2020", "2021")
-            for field in parsed_fields[collection]
-        ],
-        "sensor_layout": sensor_layout,
-        "segments": segments,
-    }
+    return _assemble_catalog(metadata, files, archives)
 
 
 def _serialise(value: dict[str, Any]) -> str:

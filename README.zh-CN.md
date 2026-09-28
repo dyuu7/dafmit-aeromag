@@ -1,84 +1,97 @@
 # DAF-MIT AeroMag
 
-`dafmit-aeromag` 是面向 DAF-MIT AIA 开放飞行数据集的 Python 接口，用于航空器磁干扰补偿和 MagNav 研究。目前支持 Zenodo v3 版本，其中包含 2020 年和 2021 年的训练飞行数据。
-
-本项目独立维护，不隶属于数据集作者或其所在机构，也不代表其获得这些方面的认可或背书。
+`dafmit-aeromag` 为 DAF-MIT AIA 公开飞行数据集提供 Python 接口，面向飞机磁干扰补偿和磁导航研究。它固定使用 Zenodo **v3**，包含 2020、2021 两个批次公开发布的 16 个航次文件。
 
 [English](README.md) | [简体中文](README.zh-CN.md) | [文档](https://dyuu7.github.io/dafmit-aeromag/zh/)
 
-HDF5 文件不会打包在本仓库中。首次使用时，文件会下载到可配置的缓存目录，并根据仓库内置目录中的校验和进行验证。
+这是独立项目，与数据集作者及其所属机构没有隶属或背书关系。大型 HDF5 文件按需下载到可配置的缓存目录，并按照包内固定发布清单校验。
 
 ## 安装
+
+需要 Python 3.10 或更新版本：
 
 ```bash
 python -m pip install dafmit-aeromag
 ```
 
-如需转换为 xarray 数据集，可安装可选依赖：
+需要可选的 xarray 转换时，安装 `"dafmit-aeromag[xarray]"`。
 
-```bash
-python -m pip install "dafmit-aeromag[xarray]"
-```
-
-## 快速开始
+## 查询目录、检查文件、读取样本
 
 ```python
 from dafmit_aeromag import Dataset, Selection
 
-data = Dataset()
+data = Dataset(data_dir="./data")
 
-# 目录查询不会下载 HDF5 数据。
+# 离线查询：文档中的字段定义和段落标记。
 print(data.flights()[["flight", "collection", "date"]])
-print(data.segments(2005, split="train"))
-print(data.field_groups(flight=2005)[["group", "name", "units"]])
+print(data.fields(flight=2005)[["name", "units", "description"]])
+print(data.field_groups(flight=2005))
+print(data.segments(2005))
+
+# 检查真实文件：缺失时下载，校验后报告实际字段。
+info = data.inspect(2005)
+print(info.sample_count)  # 6361
+print(info.fields[["name", "dtype", "units"]])
 
 frame = data.read(
-    Selection(flight=2005, lines=["2004.00"]),
+    Selection(flight=2005, lines="2004.00"),
     columns=["mag_1_uc", "ins_lat", "ins_lon"],
 )
 ```
 
-规范化结果以稳定的身份列 `flight`、`line`、`year`、`doy`、`tt` 和 `time` 开头。如果调用方需要不包含派生身份列的源字段，可以使用 `raw=True`：
+航次标识一个文件；航线是文件内部的标签，编号不一定与航次相同。标准化结果以 `flight`、`line`、`year`、`doy`、`tt`、UTC `time` 六列开头。可以指定单个字段、有顺序的字段集合、表示全部物理字段的 `columns="all"`，或只取身份列的 `columns=[]`。
+
+读取返回符合查询条件的真实样本，**不会自动按 train/holdout 过滤**。上游文件名仍保留 `_train.h5`，`segments().is_holdout` 保留来源文档的标记；它不表示数据质量差，也不证明样本已经公开。训练和评估子集由你的实验定义。[数据核验](docs/data-audit.zh.md) 解释了旧过滤方式的问题。
+
+## 明确的时间范围和批量行为
 
 ```python
-raw = data.read(
-    [Selection.all(1002), Selection(flight=2005, tt=slice(54616, 55252))],
-    columns=["mag_1_uc", "tt"],
-    raw=True,
+frame = data.read(
+    [Selection.all(1004), Selection(2005, tt=slice(54616, 55252))],
+    columns=["mag_1_uc", "flux_a_x"],
     missing="fill",
 )
 ```
 
-选择条件是显式的，并且始终限定在单个飞行架次内。航线使用类似 `"2005.20"` 的两位小数字符串表示；时间范围采用左闭右开语义。原生 `tt` 坐标和绝对 `time` 坐标是两种可选的筛选方式。读取默认使用 `split="train"`；如需读取文档记录的 holdout 区间，可以传入 `split="holdout"`，如需关闭分集过滤则传入 `split="all"`。请使用 `segments()` 查看上游记录的分段覆盖范围。
+时间区间包含起点、不包含终点。源时间 `tt`（午夜后秒数）和绝对时间 `time` 二选一。结果保留查询顺序和源文件顺序，重叠查询保留重复样本。默认每条查询都必须返回样本；预期可能为空时指定 `empty="allow"`，通过 `frame.attrs["selections"]` 查看各条查询的行数。
 
-## 为什么要为这套数据提供封装？
+`missing="fill"` 用 `NaN` 填充已知但缺失的字段，未知名称和损坏的数据仍会报错。`fields()` 描述所属采集批次的字段，`inspect(flight).fields` 报告实际文件字段。合并两个批次时，这一区别尤其有用。
 
-上游发布版本和 Zenodo 记录是权威来源，但直接使用数据集时，需要自行协调大型 HDF5 文件、分散的 readme、字段定义、校验和以及训练集/holdout 分段元数据。2020 年和 2021 年文件的 schema 也不完全相同，而且航线标签并不总能单独确定包含它的飞行文件。
+## 原始字段与 xarray
 
-本项目把这些问题整合到一个可复现的接口中：版本化目录固定精确的源文件，下载结果会缓存并校验，选择条件明确限定飞行架次，分集选择可以显式控制，规范化的身份列和时间列让跨数据集分析更可预测。字段分组、备注、传感器位置和来源链接可以帮助用户发现数据，但不会重命名或隐藏原始 HDF5 字段。如果工作流需要直接处理文件，可以使用 `fetch()` 获取经过校验的本地 HDF5 路径；字段定义仍以上游说明为准。
+```python
+raw = data.read(Selection(2005), columns=["tt", "mag_1_uc"], raw=True)
+source_path = data.fetch(2005)[2005]
+```
 
-## 数据来源与使用条款
+原始模式不生成派生列。需要直接访问 HDF5 时使用校验通过的路径。复用同一个 `Dataset`，可在文件系统状态未变时复用成功的校验记录；`fetch(2005, recheck=True)` 强制完整复查。构造数据集时设置 `offline=True` 可以禁止下载。
 
-[Zenodo v3 记录](https://zenodo.org/records/12723700) 是已发布文件、校验和及发布范围的权威来源。该记录附带的 readme 快照是本目录的主要语义依据；固定 revision 的上游 [MagNav.jl](https://github.com/MIT-AI-Accelerator/MagNav.jl) readme 提供稳定、可阅读的参考。研究数据受其自身的 [Data Sharing Agreement](https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/DATA_SHARING_AGREEMENT.md) 约束；该协议与本仓库采用 MIT 许可证的代码相互独立。使用数据或再分发任何由数据生成的成果前，请先阅读[数据来源与使用条款](docs/provenance-and-terms.zh.md)页面。
+```python
+from dafmit_aeromag import to_xarray
 
-## 文档
+array = to_xarray(raw)  # 需要安装可选的 xarray 依赖。
+```
 
-完整 API 和维护说明发布在 <https://dyuu7.github.io/dafmit-aeromag/>，也可以在 [`docs/`](docs/) 中查看。
+转换标准化表格时还会提供真正的 UTC 日期时间坐标。结果使用 `sample` 维度，以保留重复时间戳。
+
+## 文档与来源
+
+建议先阅读[快速开始](docs/quickstart.zh.md)、[数据模型](docs/data-model.zh.md)和 [0.4 迁移指南](docs/migration.zh.md)。[在线文档](https://dyuu7.github.io/dafmit-aeromag/zh/)还包含 API 参考和维护说明。
+
+文件、校验和及发布范围以 [Zenodo v3 记录](https://zenodo.org/records/12723700)为准。发布附带的 readme 快照提供目录语义，固定的 [MagNav.jl 版本](https://github.com/MIT-AI-Accelerator/MagNav.jl/tree/b79a9ceed6009878f47c72938718f96ce067d803/readmes)提供稳定来源链接。研究数据适用独立的[数据共享协议](https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/DATA_SHARING_AGREEMENT.md)，与本仓库代码的 MIT 许可证分开。详见[来源与条款](docs/provenance-and-terms.zh.md)。
 
 ## 开发
 
 ```bash
-uv sync
+uv sync --frozen
 uv run pytest
 uv run ruff check .
+uv run ruff format --check .
 uv run pyright
 uv run python scripts/check_i18n.py
 uv run mkdocs build --strict
+uv run python -m build
 ```
 
-项目要求 Python 3.10 或更高版本。目录更新脚本只会获取 Zenodo 元数据和较小的 readme 压缩包：
-
-```bash
-uv run python scripts/update_catalog.py
-uv run python scripts/update_catalog.py --check
-```
+普通测试离线运行。真实文件测试和目录重新生成的方法见[维护指南](docs/maintenance.zh.md)。

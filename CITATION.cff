@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite the software and the source data."
 title: "DAF-MIT AeroMag"
-version: "0.3.0"
+version: "0.4.0"
 type: software
 authors:
   - name: "dyuu7"

@@ -1,4 +1,4 @@
-"""Local storage and integrity checks for release files."""
+"""Download files and reuse successful verification while their state is unchanged."""
 
 from __future__ import annotations
 
@@ -8,12 +8,27 @@ from pathlib import Path
 import h5py
 import pooch
 
+from ._hdf5 import sample_count
 from .catalog_core import FileSpec
 from .exceptions import DataIntegrityError, DataUnavailableError
 
 
-def _digest(path: Path, algorithm: str) -> str:
-    hasher = hashlib.new(algorithm)
+def file_state(path: Path) -> tuple[int, int, int, int, int]:
+    try:
+        stat = path.stat()
+        return (
+            stat.st_dev,
+            stat.st_ino,
+            stat.st_size,
+            stat.st_mtime_ns,
+            stat.st_ctime_ns,
+        )
+    except OSError as exc:
+        raise DataUnavailableError(f"could not inspect local file {path}") from exc
+
+
+def _digest(path: Path) -> str:
+    hasher = hashlib.md5()
     with path.open("rb") as stream:
         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
             hasher.update(chunk)
@@ -21,103 +36,76 @@ def _digest(path: Path, algorithm: str) -> str:
 
 
 def verify_file(path: Path, spec: FileSpec) -> None:
-    """Validate a downloaded file against the catalog's size and MD5."""
-
+    """Check exact bytes and coordinate structure without caching the result."""
     if not path.is_file():
         raise DataIntegrityError(f"expected data file does not exist: {path}")
-    try:
-        size = path.stat().st_size
-    except OSError as exc:
-        raise DataIntegrityError(f"could not stat data file: {path}") from exc
-    if size != spec.size_bytes:
+    before = file_state(path)
+    if before[2] != spec.size_bytes:
         raise DataIntegrityError(
-            f"size mismatch for {path.name}: expected {spec.size_bytes} bytes, "
-            f"found {size}"
-        )
-    algorithm, expected = "md5", spec.checksum
-    try:
-        actual = _digest(path, algorithm)
-    except OSError as exc:
-        raise DataIntegrityError(f"could not read data file: {path}") from exc
-    if actual.lower() != expected.lower():
-        raise DataIntegrityError(
-            f"checksum mismatch for {path.name}: expected {expected}, found {actual}"
+            f"size mismatch for {path.name}: expected {spec.size_bytes}, "
+            f"found {before[2]} bytes"
         )
     try:
-        is_hdf5 = h5py.is_hdf5(path)
-    except OSError as exc:
-        raise DataIntegrityError(f"could not identify HDF5 data file: {path}") from exc
-    if not is_hdf5:
-        raise DataIntegrityError(f"file is not a readable HDF5 file: {path}")
-    try:
+        if _digest(path).lower() != spec.checksum.lower():
+            raise DataIntegrityError(f"checksum mismatch for {path.name}")
         with h5py.File(path, "r") as handle:
-            sample = handle.get("tt")
-            line = handle.get("line")
-            declared = handle.get("N")
-            if (
-                sample is None
-                or line is None
-                or not isinstance(sample, h5py.Dataset)
-                or not isinstance(line, h5py.Dataset)
-            ):
-                raise DataIntegrityError(
-                    f"HDF5 file has no one-dimensional line/tt coordinates: {path}"
-                )
-            if sample.ndim != 1 or line.ndim != 1 or sample.shape != line.shape:
-                raise DataIntegrityError(
-                    "HDF5 line/tt coordinates do not share a one-dimensional "
-                    f"shape: {path}"
-                )
-            if declared is not None and isinstance(declared, h5py.Dataset):
-                if declared.ndim != 0:
-                    raise DataIntegrityError(f"HDF5 N metadata is not scalar: {path}")
-                if int(declared[()]) != sample.shape[0]:
-                    raise DataIntegrityError(
-                        f"HDF5 N metadata does not match sample count in {path.name}"
-                    )
-    except DataIntegrityError:
-        raise
-    except (OSError, TypeError, ValueError, OverflowError) as exc:
-        raise DataIntegrityError(f"could not inspect HDF5 structure: {path}") from exc
-
-
-def resolve_file(
-    spec: FileSpec,
-    *,
-    data_dir: Path,
-    progress: bool,
-    offline: bool,
-) -> Path:
-    """Return a verified local file, downloading it when necessary."""
-
-    try:
-        data_dir.mkdir(parents=True, exist_ok=True)
+            sample_count(handle)
     except OSError as exc:
-        raise DataUnavailableError(
-            f"could not create data directory {data_dir}"
-        ) from exc
-    path = data_dir / spec.file
-    if path.exists():
-        verify_file(path, spec)
+        raise DataIntegrityError(f"could not inspect HDF5 file {path}: {exc}") from exc
+    if file_state(path) != before:
+        raise DataIntegrityError(f"file changed during verification: {path}")
+
+
+class FileStore:
+    """Instance-local verification records; no retained HDF5 handles."""
+
+    def __init__(self, data_dir: Path, *, progress: bool, offline: bool) -> None:
+        self.data_dir = data_dir
+        self.progress = progress
+        self.offline = offline
+        self._verified: dict[Path, tuple[FileSpec, tuple[int, int, int, int, int]]] = {}
+
+    def check_unchanged(self, paths: list[Path]) -> None:
+        """Reject results if a verified file changed while it was being read."""
+        for path in paths:
+            record = self._verified.get(path)
+            if record is None or file_state(path) != record[1]:
+                self._verified.pop(path, None)
+                raise DataIntegrityError(f"file changed during read: {path}")
+
+    def fetch(self, spec: FileSpec, *, recheck: bool = False) -> Path:
+        path = self.data_dir / spec.file
+        if not path.exists():
+            self._verified.pop(path, None)
+            if self.offline:
+                raise DataUnavailableError(
+                    f"{path.name} is not present in offline mode; "
+                    "place the Zenodo file "
+                    f"in {self.data_dir} or disable offline mode"
+                )
+            try:
+                self.data_dir.mkdir(parents=True, exist_ok=True)
+                # Pooch verifies a temporary download before moving it into place.
+                pooch.retrieve(
+                    url=spec.url,
+                    known_hash=f"md5:{spec.checksum}",
+                    fname=spec.file,
+                    path=self.data_dir,
+                    progressbar=self.progress,
+                )
+            except ValueError as exc:
+                raise DataIntegrityError(
+                    f"download failed verification for {spec.file}: {exc}"
+                ) from exc
+            except Exception as exc:
+                raise DataUnavailableError(
+                    f"could not download {spec.file}: {exc}"
+                ) from exc
+        state = file_state(path)
+        if recheck or self._verified.get(path) != (spec, state):
+            self._verified.pop(path, None)
+            verify_file(path, spec)
+            if file_state(path) != state:
+                raise DataIntegrityError(f"file changed during verification: {path}")
+            self._verified[path] = (spec, state)
         return path
-    if offline:
-        raise DataUnavailableError(
-            f"{path.name} is not present in offline mode; place the Zenodo file in "
-            f"{data_dir} or disable offline mode"
-        )
-    try:
-        downloaded = Path(
-            pooch.retrieve(
-                url=spec.url,
-                known_hash=f"md5:{spec.checksum}",
-                fname=spec.file,
-                path=data_dir,
-                progressbar=progress,
-            )
-        )
-    except Exception as exc:
-        raise DataUnavailableError(
-            f"could not download {spec.file} from {spec.url}: {exc}"
-        ) from exc
-    verify_file(downloaded, spec)
-    return downloaded

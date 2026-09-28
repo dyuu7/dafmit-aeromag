@@ -20,7 +20,7 @@ jobs:
         run: python -m pip install uv
       - name: Install dependencies
         run: uv sync --frozen
-      - name: Read the smallest real flight file
+      - name: Verify both published flight collections
         env:
           MAGNAV_INTEGRATION: "1"
         run: uv run pytest -m integration

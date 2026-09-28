@@ -42,6 +42,7 @@ plugins:
             Home: 首页
             Quickstart: 快速开始
             Data model: 数据模型
+            File audit: 数据核验
             API: API
             Provenance and terms: 数据来源与使用条款
             Migration: 迁移指南
@@ -58,6 +59,7 @@ nav:
   - Home: index.md
   - Quickstart: quickstart.md
   - Data model: data-model.md
+  - File audit: data-audit.md
   - API: api.md
   - Provenance and terms: provenance-and-terms.md
   - Migration: migration.md
