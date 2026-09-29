@@ -1,3 +1,5 @@
+from importlib.metadata import version as _distribution_version
+
 from .dataset import Dataset
 from .exceptions import (
     DataIntegrityError,
@@ -28,4 +30,4 @@ __all__ = [
     "UnknownReleaseError",
 ]
 
-__version__ = "0.4.0"
+__version__ = _distribution_version("dafmit-aeromag")

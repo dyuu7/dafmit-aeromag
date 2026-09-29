@@ -1,8 +1,6 @@
 name: Data integration
 
 on:
-  schedule:
-    - cron: "41 4 * * 0"
   workflow_dispatch:
 
 permissions:
@@ -19,8 +17,8 @@ jobs:
       - name: Install uv
         run: python -m pip install uv
       - name: Install dependencies
-        run: uv sync --frozen
+        run: uv sync --locked
       - name: Verify both published flight collections
         env:
           MAGNAV_INTEGRATION: "1"
-        run: uv run pytest -m integration
+        run: uv run --no-sync pytest -m integration

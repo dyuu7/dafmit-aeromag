@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_call:
+    inputs:
+      upload-distributions:
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -24,17 +29,15 @@ jobs:
       - name: Install uv
         run: python -m pip install uv
       - name: Install dependencies
-        run: uv sync --frozen
+        run: uv sync --locked
+      - name: Test with coverage
+        if: matrix.python-version == '3.13'
+        run: uv run --no-sync pytest --cov --cov-report=term-missing
       - name: Test
-        run: uv run pytest --cov --cov-report=term-missing
-      - name: Lint
-        run: uv run ruff check .
-      - name: Format
-        run: uv run ruff format --check .
-      - name: Type check
-        run: uv run pyright
+        if: matrix.python-version != '3.13'
+        run: uv run --no-sync pytest
 
-  docs-and-build:
+  quality-and-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -44,8 +47,27 @@ jobs:
       - name: Install uv
         run: python -m pip install uv
       - name: Install dependencies
-        run: uv sync --frozen
+        run: uv sync --locked
+      - name: Check versions
+        env:
+          RELEASE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
+        run: uv run --no-sync python scripts/check_versions.py --tag "$RELEASE_TAG"
+      - name: Lint
+        run: uv run --no-sync ruff check .
+      - name: Format
+        run: uv run --no-sync ruff format --check .
+      - name: Type check
+        run: uv run --no-sync pyright
+      - name: Check localized docs
+        run: uv run --no-sync python scripts/check_i18n.py
       - name: Build documentation
-        run: uv run mkdocs build --strict
+        run: uv run --no-sync mkdocs build --strict
       - name: Build distributions
-        run: uv run python -m build
+        run: uv run --no-sync python -m build
+      - name: Store distributions
+        if: inputs.upload-distributions
+        uses: actions/upload-artifact@v7
+        with:
+          name: python-distributions
+          path: dist/
+          if-no-files-found: error
