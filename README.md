@@ -74,7 +74,7 @@ The [Zenodo v3 record](https://zenodo.org/records/12723700) is authoritative for
 ## Development
 
 ```bash
-uv sync --frozen
+uv sync --locked
 uv run pytest
 uv run ruff check .
 uv run ruff format --check .

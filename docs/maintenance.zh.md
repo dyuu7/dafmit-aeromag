@@ -31,17 +31,18 @@ uv run python scripts/update_catalog.py --check
 ## 不下载数据的验证流程
 
 ```bash
-uv sync --frozen
-uv run pytest --cov --cov-report=term-missing
-uv run ruff check .
-uv run ruff format --check .
-uv run pyright
-uv run python scripts/check_i18n.py
-uv run mkdocs build --strict
-uv run python -m build
+uv sync --locked
+uv run --no-sync pytest --cov --cov-report=term-missing
+uv run --no-sync ruff check .
+uv run --no-sync ruff format --check .
+uv run --no-sync pyright
+uv run --no-sync python scripts/check_versions.py
+uv run --no-sync python scripts/check_i18n.py
+uv run --no-sync mkdocs build --strict
+uv run --no-sync python -m build
 ```
 
-普通测试创建小型真实 HDF5 文件，并配套对应的测试目录校验和。覆盖公共行为、校验结果复用及失效、字段结构和坐标损坏、批量顺序与空结果、资源释放。目录生成测试使用构造的发布元数据和 readme 压缩包，不依赖网络。持续集成覆盖 Python 3.10–3.14。
+普通测试创建小型真实 HDF5 文件，并配套对应的测试目录校验和。覆盖公共行为、校验结果复用及失效、字段结构和坐标损坏、批量顺序与空结果、资源释放。目录生成测试使用构造的发布元数据和 readme 压缩包，不依赖网络。持续集成测试 Python 3.10–3.14，并仅在 Python 3.13 上统计覆盖率。版本一致性检查、静态检查、双语页面配对检查、文档及发行包构建集中在独立任务中执行一次。各工作流通过 `uv sync --locked` 拒绝过期锁文件。发布流程复用同一套 CI 工作流，验证标签对应的提交并构建发行包。
 
 ## 验证公开数据文件
 
@@ -55,10 +56,12 @@ MAGNAV_INTEGRATION=1 uv run pytest -m integration
 MAGNAV_INTEGRATION=1 MAGNAV_DATA_DIR=/path/to/flight-files uv run pytest -m integration
 ```
 
-固定的文件大小、校验和、预期行数及边界回归问题见[数据核验](data-audit.md)。源文件未变化时可以复用；不能为了掩盖真实的上游不一致而修改测试数据。定时集成测试工作流独立于普通持续集成运行。
+固定的文件大小、校验和、预期行数及边界回归问题见[数据核验](data-audit.md)。源文件未变化时可以复用；不能为了掩盖真实的上游不一致而修改测试数据。Data integration 工作流独立于普通持续集成，通过 `workflow_dispatch` 手动触发，不再定时执行。修改读取器、存储层或目录后，以及发布前，应针对相应分支或标签运行。
 
 ## 文档与发布
 
 文档说明当前接口和用法，数据核验记录保留影响结果解释的依据与修正。每个文档页面都有配对的 `.en.md`、`.zh.md` 文件。修改时同步两种语言，运行配对检查，并以严格模式构建。示例或接口约定变化时，应针对合适的测试文件或公开文件执行示例代码。
 
-发布前完成测试、静态检查、格式与类型检查、文档及发行包构建，审查来源和条款链接。保持 `pyproject.toml`、`__init__.py`、`CITATION.cff` 和 `uv.lock` 中项目版本一致。创建 `vX.Y.Z` 标签会触发配置好的发布工作流，创建 GitHub Release，并通过 PyPI Trusted Publishing 发布构建产物。影响用法或结果的变化，可按需在对应的 GitHub Release 中简要说明。
+发布前完成测试、静态检查、格式与类型检查、文档及发行包构建，审查来源和条款链接。在 `pyproject.toml` 中设置包版本，同步更新 `CITATION.cff`，再运行 `uv lock` 刷新锁文件。运行时 `__version__` 读取已安装包的元数据，也适用于 `uv sync` 创建的可编辑安装。普通 CI 在同步项目后，核对引用文件与包元数据的版本是否一致。
+
+创建 `vX.Y.Z` 标签会触发发布工作流，对该提交执行完整的 CI 工作流，并额外核对标签与包版本是否一致。可在本地运行 `uv run python scripts/check_versions.py --tag vX.Y.Z` 检查拟发布的标签。验证通过后，工作流通过 PyPI Trusted Publishing 发布此次验证中构建的同一份产物，再创建 GitHub Release 并附上发行包。每个标签只创建一次 Release，不覆盖已有 Release 及其附件。影响用法或结果的变化，可按需在对应的 GitHub Release 中简要说明。

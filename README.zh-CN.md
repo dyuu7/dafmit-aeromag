@@ -74,7 +74,7 @@ source_path = data.fetch(2005)[2005]
 ## 开发
 
 ```bash
-uv sync --frozen
+uv sync --locked
 uv run pytest
 uv run ruff check .
 uv run ruff format --check .
