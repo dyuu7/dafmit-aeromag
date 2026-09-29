@@ -36,7 +36,7 @@ frame = data.read(
 
 `inspect()` 和 `read()` 会下载缺失的文件，并按照目录中的信息校验。复用同一个 `Dataset`，可以避免对没有变化的文件重复计算校验和。若不允许下载，构造时指定 `offline=True`；本地缺少文件时会抛出 `DataUnavailableError`。
 
-标准化结果以 `flight`、`line`、`year`、`doy`、`tt`、`time` 六列开头。`line` 是小数字符串；`tt` 是源文件记录的午夜后秒数；`time` 是 UTC 时间戳。源文件缺少身份字段时，根据目录中的航次编号和日期补齐。测量字段保留原始名称和单位。
+读取返回 pandas `DataFrame`。标准化结果以 `flight`、`line`、`year`、`doy`、`tt`、`time` 六列开头。`line` 是小数字符串；`tt` 是源文件记录的午夜后秒数；`time` 是 UTC 时间戳。源文件缺少身份字段时，根据目录中的航次编号和日期补齐。测量字段保留原始名称和单位。
 
 ## 明确选择哪些样本
 
@@ -57,7 +57,7 @@ by_time = data.read(
 
 区间包含起点、不包含终点：`slice(a, b)` 表示 `a <= 坐标 < b`。允许一端为 `None`，但不能两端都省略。`tt` 与 `time` 二选一；同时指定航线和时间时取交集。没有时区的时间按 UTC 解释，有时区偏移的时间会转换为 UTC。
 
-上例的最后一个样本实际存在于文件中，只有显式指定的 `tt` 区间才排除它。接口没有 `split` 参数：训练集和评估集的选择应由你的实验定义。实际文件的证据见[数据核验](data-audit.md)。
+上例的最后一个样本实际存在于文件中，只有显式指定的 `tt` 区间才排除它。训练集和评估集应在实验中通过明确的航次、航线和时间条件定义。实际文件的证据见[数据核验](data-audit.md)。
 
 ## 选择字段，处理文件间的差异
 
@@ -100,7 +100,7 @@ print(combined.attrs["selections"])
 
 结果先按查询顺序排列，每条查询内部保留源文件行顺序。重叠查询会保留重复样本。默认情况下，**任何一条**查询没有样本都会抛出 `NoDataError`，即使同批其他查询成功也一样。`empty="allow"` 允许这些空查询；全部为空时仍保留完整列结构和类型。每条查询的 `row_count` 都会写入 `frame.attrs["selections"]`，包括返回零行的查询。
 
-## 访问源文件，或转换为 xarray
+## 访问源文件
 
 ```python
 source_path = data.fetch(2005)[2005]
@@ -108,18 +108,3 @@ data.fetch(2005, recheck=True)  # 强制重新检查大小、校验和与基础�
 ```
 
 需要标量元数据（`N`、`dt`、`info`）或其他 HDF5 功能时，用 h5py 打开 `source_path`。`inspect().dt` 是文件声明的采样间隔，不代表数据没有时间缺口。
-
-安装 `dafmit-aeromag[xarray]` 后，可以使用可选转换功能：
-
-```python
-from dafmit_aeromag import to_xarray
-
-array = to_xarray(frame)
-hours = array.time.dt.hour
-
-# 本例只有一个航次，时间有序且不重复，可以显式作为索引。
-by_timestamp = array.swap_dims({"sample": "time"})
-window = by_timestamp.sel(time=slice("2021-12-21T15:11:00", "2021-12-21T15:12:00"))
-```
-
-转换结果使用 `sample` 维度，因此允许时间戳重复。`time` 是真正的 `datetime64[ns]` 坐标，数值表示 UTC，并附有 `timezone="UTC"` 元数据。在自己的分析中改用时间作维度之前，应检查时间是否有序且唯一。xarray 的标签切片包含两端，与 `Selection` 的左闭右开区间不同。

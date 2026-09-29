@@ -4,7 +4,7 @@
 
 ## 异常
 
-所有领域异常继承 `DatasetError`；`InvalidArgumentError` 同时继承 `ValueError`。不支持的关键字参数遵守 Python 的常规行为，抛出 `TypeError`。未安装 xarray 时，可选转换函数抛出 `ImportError`。
+所有领域异常继承 `DatasetError`；`InvalidArgumentError` 同时继承 `ValueError`。不支持的关键字参数遵守 Python 的常规行为，抛出 `TypeError`。
 
 | 异常 | 含义及处理方向 |
 | --- | --- |
@@ -30,11 +30,6 @@
       show_object_full_path: false
 
 ::: dafmit_aeromag.FlightInfo
-    options:
-      show_root_heading: true
-      show_object_full_path: false
-
-::: dafmit_aeromag.to_xarray
     options:
       show_root_heading: true
       show_object_full_path: false

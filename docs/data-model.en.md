@@ -12,7 +12,7 @@ Three kinds of information have different responsibilities:
 | Field meanings, sensor positions, documented segments | Release readmes | `fields()`, `sensors()`, `segments()` |
 | Your training/validation/test partition | Your experiment design | Explicit `Selection` objects and downstream analysis |
 
-`is_holdout` means that the upstream segment description contains a holdout annotation. Holdout means reserved for evaluation; it does **not** mean invalid or worthless data. Neither `True` nor `False` establishes physical availability. A documented interval can contain no released samples. A repeated line label also need not have one consistent annotation. Consequently there are no `split`, `released`, `available`, or `has_holdout` fields or filters pretending to infer these facts. See the [actual file audit](data-audit.md).
+`is_holdout` means that the upstream segment description contains a holdout annotation. Holdout means reserved for evaluation; it does **not** mean invalid or worthless data. Neither `True` nor `False` establishes physical availability. A documented interval can contain no released samples. A repeated line label also need not have one consistent annotation. Sample coverage is determined by the actual file, and training/evaluation subsets are defined by explicit selections in your experiment. See the [actual file audit](data-audit.md).
 
 ## Catalog discovery and physical inspection
 
@@ -65,11 +65,9 @@ A missing field is recognized in the catalog or another selected file but absent
 
 `empty="raise"` rejects every empty selection individually with `NoDataError`. `empty="allow"` permits them; even a fully empty result has all requested columns and their planned types. An empty batch of selections is an invalid argument, rather than an empty read.
 
-## Result metadata and conversion
+## Result metadata
 
 `frame.attrs` contains `release`, `doi`, `record_id`, `raw`, `flights`, `units`, and `selections`. Each selection records its normalized flight/line/time constraints and `row_count`, including zero for allowed empty selections. Absolute bounds are ISO timestamp strings. This is a record of the read; arbitrary downstream pandas operations are not guaranteed to maintain or update it.
-
-`to_xarray(frame)` is an independent optional conversion. Identity fields become coordinates along a `sample` dimension, measurements become variables, units are attached, and attributes are copied. UTC time becomes a real `datetime64[ns]` array with `timezone="UTC"` metadata. The `sample` dimension preserves duplicate times; switching to a time dimension is an explicit downstream decision.
 
 ## Verification and resource lifetime
 

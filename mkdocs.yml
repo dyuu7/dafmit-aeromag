@@ -45,7 +45,6 @@ plugins:
             File audit: 数据核验
             API: API
             Provenance and terms: 数据来源与使用条款
-            Migration: 迁移指南
             Maintenance: 维护
   - mkdocstrings:
       handlers:
@@ -62,7 +61,6 @@ nav:
   - File audit: data-audit.md
   - API: api.md
   - Provenance and terms: provenance-and-terms.md
-  - Migration: migration.md
   - Maintenance: maintenance.md
 
 markdown_extensions:

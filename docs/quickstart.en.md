@@ -36,7 +36,7 @@ frame = data.read(
 
 `inspect()` and `read()` download a missing file and verify it against the catalog. Reuse the same `Dataset` to avoid repeating the checksum for unchanged files. To prohibit downloads, construct it with `offline=True`; missing local files then raise `DataUnavailableError`.
 
-The normalized frame starts with `flight`, `line`, `year`, `doy`, `tt`, and `time`. `line` contains decimal strings. `tt` is the source's seconds past midnight; `time` is a UTC timestamp. Missing source identity fields are derived from the catalog's flight date and identifier. Measurements retain their source names and units.
+Reads return a pandas `DataFrame`. The normalized frame starts with `flight`, `line`, `year`, `doy`, `tt`, and `time`. `line` contains decimal strings. `tt` is the source's seconds past midnight; `time` is a UTC timestamp. Missing source identity fields are derived from the catalog's flight date and identifier. Measurements retain their source names and units.
 
 ## Choose samples explicitly
 
@@ -57,7 +57,7 @@ by_time = data.read(
 
 A range includes its start and excludes its stop: `slice(a, b)` means `a <= coordinate < b`. Either bound can be `None`, but not both. `tt` and `time` are alternatives. A line constraint and a time constraint select their intersection. Time bounds without a timezone mean UTC; explicit offsets are converted to UTC.
 
-The last sample above is present in the file. Only the explicit `tt` range excludes it. There is no `split` argument: training and evaluation selection belongs to your experiment. See the [file audit](data-audit.md) for the evidence.
+The last sample above is present in the file. Only the explicit `tt` range excludes it. Define training and evaluation subsets using explicit flight, line, and time constraints in your experiment. See the [file audit](data-audit.md) for the evidence.
 
 ## Choose fields and handle schema differences
 
@@ -100,7 +100,7 @@ print(combined.attrs["selections"])
 
 Rows follow selection order, then source row order. Overlapping selections preserve duplicates. By default **any** empty selection raises `NoDataError`, including one empty member of an otherwise successful batch. `empty="allow"` preserves the full schema even if the whole result is empty. Each selection's `row_count` is recorded in `frame.attrs["selections"]`, including zeroes.
 
-## Access the source file or convert to xarray
+## Access the source file
 
 ```python
 source_path = data.fetch(2005)[2005]
@@ -108,18 +108,3 @@ data.fetch(2005, recheck=True)  # Force a fresh size/checksum/structure check.
 ```
 
 Open `source_path` with h5py when you need scalar metadata (`N`, `dt`, `info`) or other HDF5 features. `inspect().dt` is the declared sampling interval; it does not guarantee continuous coverage.
-
-Install `dafmit-aeromag[xarray]` for the optional conversion:
-
-```python
-from dafmit_aeromag import to_xarray
-
-array = to_xarray(frame)
-hours = array.time.dt.hour
-
-# For this single flight, time is unique and ordered, so it can be the index.
-by_timestamp = array.swap_dims({"sample": "time"})
-window = by_timestamp.sel(time=slice("2021-12-21T15:11:00", "2021-12-21T15:12:00"))
-```
-
-Conversion uses a `sample` dimension so repeated timestamps remain valid. Time is a real `datetime64[ns]` coordinate containing UTC values, with `timezone="UTC"` metadata. Before using time as the dimension, check that it is unique and ordered. xarray's label slices include both endpoints; this differs from the half-open ranges in `Selection`.

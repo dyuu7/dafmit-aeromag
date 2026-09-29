@@ -18,4 +18,4 @@ frame = data.read(
 
 请先阅读[快速开始](quickstart.md)，然后通过[数据模型](data-model.md)了解版本和 schema 细节。
 
-读取使用显式的航次、航线和时间条件。上游 holdout 标记作为元数据保留，不会静默删除样本行。真实文件的证据见[数据核验](data-audit.md)，0.4 的接口变化见[迁移指南](migration.md)。
+读取使用显式的航次、航线和时间条件。上游 holdout 标记作为元数据提供，不参与样本过滤。实际样本覆盖和选择边界见[数据核验](data-audit.md)。

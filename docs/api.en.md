@@ -4,7 +4,7 @@ See the [quickstart](quickstart.md) for a complete workflow and the [data model]
 
 ## Errors
 
-All domain errors inherit from `DatasetError`. `InvalidArgumentError` also inherits from `ValueError`. Unsupported keyword arguments use Python's normal `TypeError`; the optional conversion raises `ImportError` if xarray is not installed.
+All domain errors inherit from `DatasetError`. `InvalidArgumentError` also inherits from `ValueError`. Unsupported keyword arguments use Python's normal `TypeError`.
 
 | Error | Meaning / next step |
 | --- | --- |
@@ -30,11 +30,6 @@ All domain errors inherit from `DatasetError`. `InvalidArgumentError` also inher
       show_object_full_path: false
 
 ::: dafmit_aeromag.FlightInfo
-    options:
-      show_root_heading: true
-      show_object_full_path: false
-
-::: dafmit_aeromag.to_xarray
     options:
       show_root_heading: true
       show_object_full_path: false

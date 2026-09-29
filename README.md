@@ -14,8 +14,6 @@ Requires Python 3.10 or newer:
 python -m pip install dafmit-aeromag
 ```
 
-For optional xarray conversion, install `"dafmit-aeromag[xarray]"`.
-
 ## Discover, inspect, read
 
 ```python
@@ -40,9 +38,9 @@ frame = data.read(
 )
 ```
 
-A flight identifies a file; a line is a label inside it and can use a different number. The normalized result starts with `flight`, `line`, `year`, `doy`, `tt`, and UTC `time`. Specify one field, an ordered iterable, `columns="all"` for all physical fields, or `columns=[]` for identity columns only.
+A flight identifies a file; a line is a label inside it and can use a different number. Reads return a pandas `DataFrame`; the normalized result starts with `flight`, `line`, `year`, `doy`, `tt`, and UTC `time`. Specify one field, an ordered iterable, `columns="all"` for all physical fields, or `columns=[]` for identity columns only.
 
-Reads return actual samples matching your selection. There is **no automatic train/holdout filtering**. Upstream filenames retain `_train.h5`, and `segments().is_holdout` preserves the upstream annotation; it does not imply poor quality or physical availability. Define training and evaluation subsets in your experiment. The [file audit](docs/data-audit.en.md) explains why the old filtering was incorrect.
+Reads return actual samples matching your selection. There is **no automatic train/holdout filtering**. Upstream filenames retain `_train.h5`, and `segments().is_holdout` preserves the upstream annotation; it does not imply poor quality or physical availability. Define training and evaluation subsets in your experiment. The [file audit](docs/data-audit.en.md) documents actual sample coverage and selection boundaries.
 
 ## Explicit ranges and batch behavior
 
@@ -58,7 +56,7 @@ Time ranges include the start and exclude the stop. Native `tt` (seconds past mi
 
 `missing="fill"` fills absent recognized fields with `NaN`; unknown names and malformed data still raise errors. `fields()` describes the collection, while `inspect(flight).fields` reports actual fields. This distinction matters when combining the two collection schemas.
 
-## Native data and xarray
+## Native fields and source files
 
 ```python
 raw = data.read(Selection(2005), columns=["tt", "mag_1_uc"], raw=True)
@@ -67,17 +65,9 @@ source_path = data.fetch(2005)[2005]
 
 Raw reads omit derived columns. Use the verified path for direct HDF5 access. Reusing one `Dataset` reuses successful checks while the file's filesystem state is unchanged; `fetch(2005, recheck=True)` forces a full recheck. Set `offline=True` when constructing the dataset to prohibit downloads.
 
-```python
-from dafmit_aeromag import to_xarray
-
-array = to_xarray(raw)  # Requires the optional xarray extra.
-```
-
-Converting a normalized frame also supplies a real UTC datetime coordinate. A `sample` dimension preserves repeated timestamps.
-
 ## Documentation and provenance
 
-Start with the [quickstart](docs/quickstart.en.md), [data model](docs/data-model.en.md), and [0.4 migration guide](docs/migration.en.md). The published [documentation site](https://dyuu7.github.io/dafmit-aeromag/) includes the API reference and maintenance guide.
+Start with the [quickstart](docs/quickstart.en.md) and [data model](docs/data-model.en.md). The published [documentation site](https://dyuu7.github.io/dafmit-aeromag/) includes the API reference and maintenance guide.
 
 The [Zenodo v3 record](https://zenodo.org/records/12723700) is authoritative for files, checksums, and release scope. Its readme snapshot supplies the catalog semantics; a pinned [MagNav.jl revision](https://github.com/MIT-AI-Accelerator/MagNav.jl/tree/b79a9ceed6009878f47c72938718f96ce067d803/readmes) provides stable source links. The research data has its own [Data Sharing Agreement](https://github.com/MIT-AI-Accelerator/MagNav.jl/blob/b79a9ceed6009878f47c72938718f96ce067d803/readmes/DATA_SHARING_AGREEMENT.md), separate from this repository's MIT code license. See [provenance and terms](docs/provenance-and-terms.en.md) for details.
 

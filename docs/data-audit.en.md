@@ -1,6 +1,6 @@
 # Audit of published files
 
-This audit supports the 0.4 interface change. It examined the pinned Zenodo v3 record, both release readme archives and datasheets, and the actual Flt1004 (2020) and Flt2005 (2021) HDF5 files. The sample-level conclusions below concern **these two files**, not a claim that all 16 payloads were inspected.
+This audit records sample coverage and the evidence for selection behavior. It examined the pinned Zenodo v3 record, both release readme archives and datasheets, and the actual Flt1004 (2020) and Flt2005 (2021) HDF5 files. The sample-level conclusions below concern **these two files**, not a claim that all 16 payloads were inspected.
 
 ## What the upstream release says
 
@@ -36,7 +36,7 @@ Version 0.3 classified holdout using readme time intervals alone. It incorrectly
 | 0.3 `split="holdout"` | 0 (`NoDataError`) | 1 |
 | 0.4 `Selection.all(...)` | 81408 | 6361 |
 
-The single old “holdout” row was a boundary-classification error, not a usable evaluation set. An explicit 0.4 selection `tt=slice(54616, 55252)` still returns 6360 rows, correctly following the caller's half-open interval. Reading line `"2004.00"` returns all 6361.
+The single old “holdout” row was a boundary-classification error, not a usable evaluation set. An explicit selection `tt=slice(54616, 55252)` returns 6360 rows, correctly following the caller's half-open interval. Reading line `"2004.00"` returns all 6361.
 
 ## Reproduce the verification
 

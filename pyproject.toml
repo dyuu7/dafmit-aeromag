@@ -68,7 +68,6 @@ include = [
     "/scripts",
     "/README.md",
     "/README.zh-CN.md",
-    "/CHANGELOG.md",
     "/CITATION.cff",
     "/LICENSE",
     "/mkdocs.yml",

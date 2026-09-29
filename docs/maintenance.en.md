@@ -2,7 +2,7 @@
 
 ## Follow the responsibility boundaries
 
-The public interface is `Dataset`, immutable `Selection`, the `FlightInfo` report, and standalone `to_xarray`. Keep scientific experiment choices outside the reader.
+The public interface is `Dataset`, immutable `Selection`, and the `FlightInfo` report. Reads return pandas `DataFrame` objects. Keep scientific experiment choices and downstream format conversions outside the reader.
 
 | Module | Responsibility |
 | --- | --- |
@@ -12,29 +12,21 @@ The public interface is `Dataset`, immutable `Selection`, the `FlightInfo` repor
 | `storage.py` | Download, byte verification, and instance-local verification records |
 | `_hdf5.py` | Shared file structure and identity-value validation |
 | `reader.py` | Actual sample discovery, explicit masks, schema planning, file resource lifetime |
-| `conversion.py` | Convert a loaded frame without requiring dataset state |
 
 The reader must not infer sample membership from `is_holdout`. Missing-field filling must not become corruption recovery. Do not introduce another public configuration layer for choices already expressed by `Selection` or `read` arguments.
 
 ## Update the catalog
 
-The bundled catalog deliberately pins one Zenodo release. Rebuild it when deliberately adopting or reviewing source metadata:
+The bundled catalog and generation script are fixed to Zenodo v3, record `12723700`. Rebuild the catalog when reviewing source metadata or changing its parsing rules:
 
 ```bash
-uv run python scripts/update_catalog.py --record 12723700
+uv run python scripts/update_catalog.py
 uv run python scripts/update_catalog.py --check
 ```
 
 This downloads the record and small readme archives, not HDF5 payloads. Review file identities, dates, units, source links, and segment annotations. `is_holdout` preserves an upstream note; it does not assert availability. The GitHub readme revision is pinned in `scripts/update_catalog.py`.
 
-When Zenodo is temporarily unavailable, reuse the checked-in file identities with pinned GitHub readmes:
-
-```bash
-uv run python scripts/update_catalog.py --base-catalog src/dafmit_aeromag/catalog/v3.json
-uv run python scripts/update_catalog.py --base-catalog src/dafmit_aeromag/catalog/v3.json --check
-```
-
-Both entry paths call the same catalog assembly code, so segment interpretation cannot drift between them. The fallback changes the metadata retrieval source; it does not discover new release files. Any change to the release or checksums requires the normal Zenodo path and review.
+Use `--output /path/to/catalog.json` to write a separate file for comparison; `--check` compares the generated content with the output file without writing it. If Zenodo is temporarily unavailable, rerun the command later. Adopting another data release is a manual project update that includes the generator, bundled catalog, tests, and documentation.
 
 ## Test without downloading data
 
@@ -49,7 +41,7 @@ uv run mkdocs build --strict
 uv run python -m build
 ```
 
-Ordinary tests create small real HDF5 files with matching test manifest hashes. They exercise public behavior, checksum reuse/invalidation, schema and coordinate corruption, batch order/empty results, resource cleanup, and xarray conversion. Catalog-generation tests compare both retrieval paths without a network dependency. CI covers Python 3.10–3.14.
+Ordinary tests create small real HDF5 files with matching test manifest hashes. They exercise public behavior, checksum reuse/invalidation, schema and coordinate corruption, batch order/empty results, and resource cleanup. Catalog-generation tests use synthetic release metadata and readme archives without a network dependency. CI covers Python 3.10–3.14.
 
 ## Test the published payloads
 
@@ -67,8 +59,6 @@ See the [file audit](data-audit.md) for pinned sizes, checksums, expected counts
 
 ## Documentation and releases
 
-Every documentation page has matching `.en.md` and `.zh.md` sources. Update both, run the parity check, and build with strict mode. When examples or contracts change, verify example code against appropriate fixtures or published files.
+Documentation describes the current interface and usage. The file audit preserves evidence and corrections that affect result interpretation. Every documentation page has matching `.en.md` and `.zh.md` sources. Update both, run the parity check, and build with strict mode. When examples or contracts change, verify example code against appropriate fixtures or published files.
 
-The weekly `upstream.yml` workflow follows the concept DOI and reports a newer release through a GitHub issue. It does not rewrite the catalog. A maintainer reviews the new release explicitly.
-
-Before release, run tests, lint, format/type checks, documentation and distribution builds; review provenance/terms links and the changelog. Keep the version consistent in `pyproject.toml`, `__init__.py`, `CITATION.cff`, and the root entry in `uv.lock`. Creating a `vX.Y.Z` tag triggers the configured publish workflow, which creates the GitHub Release and publishes the built distributions through PyPI Trusted Publishing.
+Before release, run tests, lint, format/type checks, documentation and distribution builds; review provenance/terms links. Keep the version consistent in `pyproject.toml`, `__init__.py`, `CITATION.cff`, and the root entry in `uv.lock`. Creating a `vX.Y.Z` tag triggers the configured publish workflow, which creates the GitHub Release and publishes the built distributions through PyPI Trusted Publishing. Add a brief note about changes affecting usage or results to the corresponding GitHub Release when needed.
