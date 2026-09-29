@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the checked-in catalog from a Zenodo record.
+"""Rebuild the v3 catalog from Zenodo record 12723700.
 
 The script deliberately downloads only Zenodo metadata and the small upstream
 readme archives. HDF5 payloads are never needed to rebuild the catalog.
@@ -22,16 +22,12 @@ from typing import Any
 
 _ROOT = Path(__file__).resolve().parents[1]
 _DEFAULT_OUTPUT = _ROOT / "src" / "dafmit_aeromag" / "catalog" / "v3.json"
-_ZENODO_API = "https://zenodo.org/api/records"
+_ZENODO_RECORD = "https://zenodo.org/api/records/12723700"
 _UPSTREAM_REPOSITORY = "https://github.com/MIT-AI-Accelerator/MagNav.jl"
 # This revision contains the readmes used for the v3 metadata interpretation.
 _UPSTREAM_REVISION = "b79a9ceed6009878f47c72938718f96ce067d803"
 _UPSTREAM_READMES = f"{_UPSTREAM_REPOSITORY}/blob/{_UPSTREAM_REVISION}/readmes"
 _UPSTREAM_READMES_TREE = f"{_UPSTREAM_REPOSITORY}/tree/{_UPSTREAM_REVISION}/readmes"
-_UPSTREAM_RAW_READMES = (
-    "https://raw.githubusercontent.com/MIT-AI-Accelerator/MagNav.jl/"
-    f"{_UPSTREAM_REVISION}/readmes"
-)
 _LINE_RE = re.compile(
     r"^\s*(?P<start>[0-9]+(?:\.[0-9]+)?)\s+"
     r"(?P<stop>[0-9]+(?:\.[0-9]+)?)\s+"
@@ -79,18 +75,14 @@ def _get_json(url: str) -> dict[str, Any]:
 
 def _get_bytes(url: str, *, timeout: int = 120) -> bytes:
     request = urllib.request.Request(url, headers={"User-Agent": "dafmit-aeromag"})
-    for attempt in range(3):
+    for attempt in range(2):
         try:
             with urllib.request.urlopen(request, timeout=timeout) as response:
                 return response.read()
         except (TimeoutError, urllib.error.HTTPError, urllib.error.URLError):
-            if attempt == 2:
-                raise
             time.sleep(2**attempt)
-
-
-def _get_text(url: str) -> str:
-    return _get_bytes(url).decode("utf-8", errors="replace")
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        return response.read()
 
 
 def _canonical_line(value: str) -> str:
@@ -305,7 +297,6 @@ def _assemble_catalog(
     files: dict[int, dict[str, Any]],
     archives: dict[str, dict[str, str]],
 ) -> dict[str, Any]:
-    """Interpret source texts once, regardless of their acquisition path."""
     fields: list[dict[str, Any]] = []
     sensors: list[dict[str, Any]] = []
     for collection, archive in archives.items():
@@ -366,8 +357,8 @@ def _assemble_catalog(
     }
 
 
-def build_catalog(record_id: int) -> dict[str, Any]:
-    record = _get_json(f"{_ZENODO_API}/{record_id}")
+def build_catalog() -> dict[str, Any]:
+    record = _get_json(_ZENODO_RECORD)
     upstream = record.get("metadata", {})
     metadata = {
         "release": "v3",
@@ -377,7 +368,7 @@ def build_catalog(record_id: int) -> dict[str, Any]:
         "concept_doi": upstream.get("conceptdoi", "10.5281/zenodo.4271803"),
         "title": upstream.get("title", "DAF-MIT AIA Open Flight Data"),
         "source_url": f"https://zenodo.org/records/{record['id']}",
-        "generated_from": f"{_ZENODO_API}/{record['id']}",
+        "generated_from": _ZENODO_RECORD,
     }
     archives = {
         collection: _read_zip(_get_bytes(_find_readme_zip(record, collection)))
@@ -386,51 +377,20 @@ def build_catalog(record_id: int) -> dict[str, Any]:
     return _assemble_catalog(metadata, _file_metadata(record), archives)
 
 
-def build_catalog_from_existing(base_path: Path) -> dict[str, Any]:
-    """Keep published file identities, refreshing texts from the pinned revision."""
-    base = json.loads(base_path.read_text(encoding="utf-8"))
-    tables = {"flights", "fields", "segments", "sensor_layout", "sources"}
-    metadata = {key: value for key, value in base.items() if key not in tables}
-    files = {int(item["flight"]): item for item in base["flights"]}
-    archives = {}
-    for collection in ("2020", "2021"):
-        names = [f"sgl_{collection}_fields_readme.txt"]
-        names.extend(
-            f"Flt{flight}_readme.txt"
-            for flight in files
-            if ("2020" if flight < 2000 else "2021") == collection
-        )
-        archives[collection] = {
-            name: _get_text(f"{_UPSTREAM_RAW_READMES}/{name}") for name in names
-        }
-    return _assemble_catalog(metadata, files, archives)
-
-
 def _serialise(value: dict[str, Any]) -> str:
     return json.dumps(value, indent=2, sort_keys=False) + "\n"
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--record", type=int, default=12723700)
     parser.add_argument("--output", type=Path, default=_DEFAULT_OUTPUT)
-    parser.add_argument(
-        "--base-catalog",
-        type=Path,
-        help="refresh metadata from upstream readmes using an existing catalog",
-    )
     parser.add_argument(
         "--check",
         action="store_true",
         help="check whether the checked-in catalog is current without writing it",
     )
     args = parser.parse_args()
-    source = (
-        build_catalog_from_existing(args.base_catalog)
-        if args.base_catalog is not None
-        else build_catalog(args.record)
-    )
-    generated = _serialise(source)
+    generated = _serialise(build_catalog())
     if args.check:
         if (
             not args.output.exists()

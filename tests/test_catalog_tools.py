@@ -74,11 +74,10 @@ For Flt1008 & Flt1009, orientation was modified
     ]
 
 
-def test_generation_paths_share_the_same_catalog_interpretation(tmp_path, monkeypatch):
+def test_catalog_generation_from_release_archives(monkeypatch):
     import io
     import json
     import zipfile
-    from pathlib import Path
 
     from scripts import update_catalog as updater
 
@@ -131,14 +130,18 @@ def test_generation_paths_share_the_same_catalog_interpretation(tmp_path, monkey
             for year in ("2020", "2021")
         ],
     }
-    monkeypatch.setattr(updater, "_get_json", lambda url: record)
-    monkeypatch.setattr(updater, "_get_bytes", lambda url: archives[url])
-    generated = updater.build_catalog(12723700)
-    base = tmp_path / "catalog.json"
-    base.write_text(json.dumps(generated))
-    monkeypatch.setattr(updater, "_get_text", lambda url: readmes[Path(url).name])
-    refreshed = updater.build_catalog_from_existing(base)
-    assert refreshed == generated
+    responses = {
+        "https://zenodo.org/api/records/12723700": json.dumps(record).encode(),
+        **archives,
+    }
+    monkeypatch.setattr(updater, "_get_bytes", lambda url: responses[url])
+    generated = updater.build_catalog()
+    assert generated["release"] == "v3"
+    assert generated["record_id"] == 12723700
+    assert generated["generated_from"] == "https://zenodo.org/api/records/12723700"
+    assert [f["flight"] for f in generated["flights"]] == [1004, 2005]
+    assert [f["date"] for f in generated["flights"]] == ["2020-06-30", "2021-12-21"]
+    assert [f["collection"] for f in generated["fields"]] == ["2020", "2021"]
     assert [s["is_holdout"] for s in generated["segments"]] == [
         False,
         True,

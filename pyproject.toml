@@ -97,7 +97,7 @@ src = ["src", "tests", "scripts"]
 select = ["E", "F", "I", "UP", "B", "PT"]
 
 [tool.pyright]
-include = ["src"]
+include = ["src", "scripts"]
 pythonVersion = "3.10"
 typeCheckingMode = "standard"
 reportMissingImports = false
