@@ -8,7 +8,7 @@ import h5py
 import numpy as np
 import pytest
 
-from dafmit_aeromag import Dataset, NoDataError, Selection, to_xarray
+from dafmit_aeromag import Dataset, NoDataError, Selection
 
 pytestmark = [
     pytest.mark.integration,
@@ -45,7 +45,7 @@ def test_complete_file_matches_source(real_data, flight, expected):
             np.testing.assert_array_equal(frame[name], source[name][:])
             np.testing.assert_array_equal(raw[name], source[name][:])
         np.testing.assert_array_equal(raw.line, source["line"][:])
-    assert to_xarray(frame).time.dtype == np.dtype("datetime64[ns]")
+    assert str(frame.time.dtype) == "datetime64[ns, UTC]"
 
 
 def test_2005_boundary_belongs_to_transit(real_data):

@@ -1,6 +1,5 @@
 """Access to the open MIT-AI-Accelerator flight data releases."""
 
-from .conversion import to_xarray
 from .dataset import Dataset
 from .exceptions import (
     DataIntegrityError,
@@ -21,7 +20,6 @@ __all__ = [
     "DataUnavailableError",
     "Dataset",
     "FlightInfo",
-    "to_xarray",
     "DatasetError",
     "InvalidArgumentError",
     "MissingFieldError",

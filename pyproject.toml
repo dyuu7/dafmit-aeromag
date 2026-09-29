@@ -35,9 +35,6 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 
-[project.optional-dependencies]
-xarray = ["xarray>=2024.1"]
-
 [project.urls]
 Documentation = "https://dyuu7.github.io/dafmit-aeromag/"
 Issues = "https://github.com/dyuu7/dafmit-aeromag/issues"
@@ -58,7 +55,6 @@ dev = [
     "pytest>=8.2",
     "pytest-cov>=5.0",
     "ruff>=0.8",
-    "xarray>=2024.1",
 ]
 
 [tool.hatch.build.targets.wheel]
