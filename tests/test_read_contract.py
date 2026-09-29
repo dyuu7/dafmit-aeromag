@@ -1,5 +1,3 @@
-"""Public behavior that must not depend on readme interval annotations."""
-
 import pandas as pd
 import pytest
 

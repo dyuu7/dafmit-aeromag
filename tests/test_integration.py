@@ -1,5 +1,3 @@
-"""Public behavior checked against checksum-pinned files from both collections."""
-
 from __future__ import annotations
 
 import os

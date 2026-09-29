@@ -1,5 +1,3 @@
-"""Access to the open MIT-AI-Accelerator flight data releases."""
-
 from .dataset import Dataset
 from .exceptions import (
     DataIntegrityError,
@@ -19,8 +17,8 @@ __all__ = [
     "DataIntegrityError",
     "DataUnavailableError",
     "Dataset",
-    "FlightInfo",
     "DatasetError",
+    "FlightInfo",
     "InvalidArgumentError",
     "MissingFieldError",
     "NoDataError",

@@ -1,5 +1,3 @@
-"""Shared HDF5 structure validation, independent of query and download policy."""
-
 from collections.abc import Iterable
 from typing import cast
 

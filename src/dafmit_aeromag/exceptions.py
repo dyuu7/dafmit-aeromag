@@ -1,6 +1,3 @@
-"""Exceptions raised by :mod:`dafmit_aeromag`."""
-
-
 class DatasetError(Exception):
     """Base class for all expected library errors."""
 

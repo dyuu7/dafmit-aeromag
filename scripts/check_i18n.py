@@ -1,5 +1,3 @@
-"""Check that every documentation page has English and Chinese sources."""
-
 from __future__ import annotations
 
 from pathlib import Path

@@ -1,5 +1,3 @@
-"""Input rules shared by selection, catalog, and file access."""
-
 from collections.abc import Iterable, Mapping, Set
 from numbers import Integral
 from typing import TypeVar, cast

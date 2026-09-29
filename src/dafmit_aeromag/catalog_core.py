@@ -1,5 +1,3 @@
-"""Internal access to the bundled release catalog; no file downloads."""
-
 from __future__ import annotations
 
 import json

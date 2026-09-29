@@ -1,5 +1,3 @@
-"""Read actual HDF5 samples. Readme annotations never filter rows here."""
-
 from __future__ import annotations
 
 from contextlib import ExitStack
@@ -291,7 +289,7 @@ def read_files(
     missing: Literal["raise", "fill"],
     empty: Literal["raise", "allow"],
 ) -> tuple[pd.DataFrame, list[int]]:
-    """Validate the full query schema, read samples, then concatenate in query order."""
+    """Select samples using file coordinates; readme segments never filter rows."""
     try:
         with ExitStack() as stack:
             readers = {

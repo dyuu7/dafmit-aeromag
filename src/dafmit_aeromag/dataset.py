@@ -1,5 +1,3 @@
-"""The public dataset interface: discovery, verified files, and explicit reads."""
-
 from __future__ import annotations
 
 from collections.abc import Iterable

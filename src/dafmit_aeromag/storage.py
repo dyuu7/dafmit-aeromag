@@ -1,5 +1,3 @@
-"""Download files and reuse successful verification while their state is unchanged."""
-
 from __future__ import annotations
 
 import hashlib
