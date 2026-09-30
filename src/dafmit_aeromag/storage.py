@@ -2,13 +2,17 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import h5py
 import pooch
+from filelock import FileLock, Timeout
 
 from ._hdf5 import sample_count
 from .catalog_core import FileSpec
 from .exceptions import DataIntegrityError, DataUnavailableError
+
+_DOWNLOAD_LOCK_TIMEOUT = 3600
 
 
 def file_state(path: Path) -> tuple[int, int, int, int, int]:
@@ -71,34 +75,7 @@ class FileStore:
                 self._verified.pop(path, None)
                 raise DataIntegrityError(f"file changed during read: {path}")
 
-    def fetch(self, spec: FileSpec, *, recheck: bool = False) -> Path:
-        path = self.data_dir / spec.file
-        if not path.exists():
-            self._verified.pop(path, None)
-            if self.offline:
-                raise DataUnavailableError(
-                    f"{path.name} is not present in offline mode; "
-                    "place the Zenodo file "
-                    f"in {self.data_dir} or disable offline mode"
-                )
-            try:
-                self.data_dir.mkdir(parents=True, exist_ok=True)
-                # Pooch verifies a temporary download before moving it into place.
-                pooch.retrieve(
-                    url=spec.url,
-                    known_hash=f"md5:{spec.checksum}",
-                    fname=spec.file,
-                    path=self.data_dir,
-                    progressbar=self.progress,
-                )
-            except ValueError as exc:
-                raise DataIntegrityError(
-                    f"download failed verification for {spec.file}: {exc}"
-                ) from exc
-            except Exception as exc:
-                raise DataUnavailableError(
-                    f"could not download {spec.file}: {exc}"
-                ) from exc
+    def _verified_path(self, path: Path, spec: FileSpec, *, recheck: bool) -> Path:
         state = file_state(path)
         if recheck or self._verified.get(path) != (spec, state):
             self._verified.pop(path, None)
@@ -107,3 +84,53 @@ class FileStore:
                 raise DataIntegrityError(f"file changed during verification: {path}")
             self._verified[path] = (spec, state)
         return path
+
+    def _download(self, path: Path, spec: FileSpec) -> None:
+        try:
+            with TemporaryDirectory(
+                prefix=f".{path.name}.", dir=self.data_dir
+            ) as directory:
+                temporary = Path(directory) / path.name
+                # Normal file creation preserves umask and inherited directory ACLs.
+                downloader = pooch.HTTPDownloader(progressbar=self.progress)
+                downloader(spec.url, temporary, None)
+                verify_file(temporary, spec)
+                temporary.replace(path)
+        except DataIntegrityError:
+            raise
+        except Exception as exc:
+            raise DataUnavailableError(
+                f"could not download {spec.file}: {exc}"
+            ) from exc
+
+    def fetch(self, spec: FileSpec, *, recheck: bool = False) -> Path:
+        path = self.data_dir / spec.file
+        if path.exists():
+            return self._verified_path(path, spec, recheck=recheck)
+        self._verified.pop(path, None)
+        if self.offline:
+            raise DataUnavailableError(
+                f"{path.name} is not present in offline mode; "
+                "place the Zenodo file "
+                f"in {self.data_dir} or disable offline mode"
+            )
+        lock_path = path.with_name(f".{path.name}.lock")
+        try:
+            self.data_dir.mkdir(parents=True, exist_ok=True)
+            with FileLock(
+                lock_path,
+                timeout=_DOWNLOAD_LOCK_TIMEOUT,
+                fallback_to_soft=False,
+                preserve_lock_file=True,
+            ):
+                if not path.exists():
+                    self._download(path, spec)
+                return self._verified_path(path, spec, recheck=recheck)
+        except Timeout as exc:
+            raise DataUnavailableError(
+                f"timed out waiting for download lock for {path}"
+            ) from exc
+        except OSError as exc:
+            raise DataUnavailableError(
+                f"could not access download directory or lock for {path}: {exc}"
+            ) from exc

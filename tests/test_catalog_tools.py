@@ -1,6 +1,12 @@
 from __future__ import annotations
 
+import io
+import zipfile
+
+import pytest
 from scripts.update_catalog import (
+    _file_metadata,
+    _read_zip,
     parse_field_notes,
     parse_fields,
     parse_flight_notes,
@@ -50,6 +56,7 @@ radar
 
 ins_pitch, ins_roll
 - yaw then pitch then roll
+  relative to the aircraft
 
 Magnetometer/Fluxgate positions in reference to front seat rail [m]
   Sensor   Description                      X       Y       Z
@@ -63,7 +70,8 @@ For Flt1008 & Flt1009, orientation was modified
     sensors = parse_sensor_layout(text, "2020")
 
     assert notes["radar"] == ["unavailable at some times"]
-    assert notes["ins_pitch"] == ["yaw then pitch then roll"]
+    assert notes["ins_pitch"] == ["yaw then pitch then roll relative to the aircraft"]
+    assert notes["ins_roll"] == notes["ins_pitch"]
     assert sensors[0]["sensor"] == "Mag 1"
     assert sensors[0]["x"] == -12.01
     assert sensors[1]["sensor"] == "Flux A"
@@ -74,15 +82,91 @@ For Flt1008 & Flt1009, orientation was modified
     ]
 
 
+def test_table_parsers_reject_unrecognized_rows_and_duplicates() -> None:
+    with pytest.raises(ValueError, match=r"sgl_2021_fields_readme.txt:3: invalid"):
+        parse_fields(
+            "Field Units Description\n"
+            "mag_1_uc  nT  magnetic field\n"
+            "ins_lat m latitude\n",
+            "2021",
+        )
+    with pytest.raises(ValueError, match="duplicate field 'mag_1_uc'"):
+        parse_fields(
+            "Field Units Description\nmag_1_uc  nT  field\nmag_1_uc  nT  field\n",
+            "2021",
+        )
+    with pytest.raises(ValueError, match=r"sgl_2020_fields_readme.txt:4: invalid"):
+        parse_sensor_layout(
+            "Magnetometer/Fluxgate positions\n"
+            "Sensor Description X Y Z\n"
+            "Mag 1 Tail stinger -12 0 1\n"
+            "Mag 2 missing-coordinate -3 0\n",
+            "2020",
+        )
+    with pytest.raises(ValueError, match=r"Flt2005_readme.txt:4: invalid"):
+        parse_flight_readme(
+            "Flight 2005\n21-Dec-2021\n"
+            "Start Time End Time Line Number Description\n"
+            "malformed segment row\n",
+            2005,
+        )
+
+
+def test_field_notes_reject_unknown_headings_and_orphan_bullets() -> None:
+    with pytest.raises(ValueError, match="missing field notes section"):
+        parse_field_notes("Field Units Description", "2020", {"ins_pitch"})
+    with pytest.raises(ValueError, match=r"sgl_2020_fields_readme.txt:5: invalid"):
+        parse_field_notes(
+            "Notes on specific flight data fields:\n"
+            "ins_pitch\n- known note\n\nunknown_field\n- misplaced note\n",
+            "2020",
+            {"ins_pitch"},
+        )
+    with pytest.raises(ValueError, match=r"sgl_2020_fields_readme.txt:2: invalid"):
+        parse_field_notes(
+            "Notes on specific flight data fields:\n- no field heading\n",
+            "2020",
+            {"ins_pitch"},
+        )
+
+
+def test_readme_archive_rejects_duplicate_names_and_invalid_text() -> None:
+    archive = io.BytesIO()
+    with zipfile.ZipFile(archive, "w") as stream:
+        stream.writestr("a/Flt2005_readme.txt", "first")
+        stream.writestr("b/flt2005_readme.txt", "second")
+    with pytest.raises(ValueError, match="duplicate readme archive filename"):
+        _read_zip(archive.getvalue())
+
+    archive = io.BytesIO()
+    with zipfile.ZipFile(archive, "w") as stream:
+        stream.writestr("Flt2005_readme.txt", b"date\n\xff")
+    with pytest.raises(ValueError, match=r"Flt2005_readme.txt:2: invalid UTF-8"):
+        _read_zip(archive.getvalue())
+
+
+def test_zenodo_record_rejects_duplicate_flights() -> None:
+    item = {
+        "key": "Flt2005_train.h5",
+        "checksum": "md5:" + "0" * 32,
+        "links": {"content": "https://example.invalid/2005.h5"},
+        "size": 1,
+    }
+    with pytest.raises(ValueError, match="duplicate flight 2005"):
+        _file_metadata({"files": [item, item]})
+
+
 def test_catalog_generation_from_release_archives(monkeypatch):
-    import io
     import json
-    import zipfile
 
     from scripts import update_catalog as updater
 
     field_text = (
         "Field        Units  Description\nmag_1_uc     nT     magnetic measurement\n"
+        "Notes on specific flight data fields:\n"
+        "Magnetometer/Fluxgate positions\n"
+        "Sensor Description X Y Z\n"
+        "Mag 1 Tail stinger -12 0 1\n"
     )
     readmes = {
         "sgl_2020_fields_readme.txt": field_text,

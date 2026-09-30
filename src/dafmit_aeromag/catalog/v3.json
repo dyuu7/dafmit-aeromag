@@ -698,7 +698,7 @@
         "AIRGrav (airborne gravimeter) system (http://www.sgl.com/Gravity.html)",
         "3-axis gimballed INS, run in local-level, wander-angle mechanization",
         "corrected for temperature, misalignment, and scale factor",
-        "digitizers used for accelerometers are sigma-delta type and require low-pass",
+        "digitizers used for accelerometers are sigma-delta type and require low-pass filtering to increase resolution",
         "ins_acc_x: nominally horizontal, ccw from north by ins_wander [rad]",
         "ins_acc_y: nominally horizontal, 90 [deg] ccw from ins_acc_x",
         "ins_acc_z: nominally vertical (up), includes gravity term (~navigation frame)"
@@ -715,7 +715,7 @@
         "AIRGrav (airborne gravimeter) system (http://www.sgl.com/Gravity.html)",
         "3-axis gimballed INS, run in local-level, wander-angle mechanization",
         "corrected for temperature, misalignment, and scale factor",
-        "digitizers used for accelerometers are sigma-delta type and require low-pass",
+        "digitizers used for accelerometers are sigma-delta type and require low-pass filtering to increase resolution",
         "ins_acc_x: nominally horizontal, ccw from north by ins_wander [rad]",
         "ins_acc_y: nominally horizontal, 90 [deg] ccw from ins_acc_x",
         "ins_acc_z: nominally vertical (up), includes gravity term (~navigation frame)"
@@ -732,7 +732,7 @@
         "AIRGrav (airborne gravimeter) system (http://www.sgl.com/Gravity.html)",
         "3-axis gimballed INS, run in local-level, wander-angle mechanization",
         "corrected for temperature, misalignment, and scale factor",
-        "digitizers used for accelerometers are sigma-delta type and require low-pass",
+        "digitizers used for accelerometers are sigma-delta type and require low-pass filtering to increase resolution",
         "ins_acc_x: nominally horizontal, ccw from north by ins_wander [rad]",
         "ins_acc_y: nominally horizontal, 90 [deg] ccw from ins_acc_x",
         "ins_acc_z: nominally vertical (up), includes gravity term (~navigation frame)"
@@ -1567,7 +1567,7 @@
         "AIRGrav (airborne gravimeter) system (http://www.sgl.com/Gravity.html)",
         "3-axis gimballed INS, run in local-level, wander-angle mechanization",
         "corrected for temperature, misalignment, and scale factor",
-        "digitizers used for accelerometers are sigma-delta type and require low-pass",
+        "digitizers used for accelerometers are sigma-delta type and require low-pass filtering to increase resolution",
         "ins_acc_x: nominally horizontal, ccw from north by ins_wander [rad]",
         "ins_acc_y: nominally horizontal, 90 [deg] ccw from ins_acc_x",
         "ins_acc_z: nominally vertical (up), includes gravity term (~navigation frame)"
@@ -1584,7 +1584,7 @@
         "AIRGrav (airborne gravimeter) system (http://www.sgl.com/Gravity.html)",
         "3-axis gimballed INS, run in local-level, wander-angle mechanization",
         "corrected for temperature, misalignment, and scale factor",
-        "digitizers used for accelerometers are sigma-delta type and require low-pass",
+        "digitizers used for accelerometers are sigma-delta type and require low-pass filtering to increase resolution",
         "ins_acc_x: nominally horizontal, ccw from north by ins_wander [rad]",
         "ins_acc_y: nominally horizontal, 90 [deg] ccw from ins_acc_x",
         "ins_acc_z: nominally vertical (up), includes gravity term (~navigation frame)"
@@ -1601,7 +1601,7 @@
         "AIRGrav (airborne gravimeter) system (http://www.sgl.com/Gravity.html)",
         "3-axis gimballed INS, run in local-level, wander-angle mechanization",
         "corrected for temperature, misalignment, and scale factor",
-        "digitizers used for accelerometers are sigma-delta type and require low-pass",
+        "digitizers used for accelerometers are sigma-delta type and require low-pass filtering to increase resolution",
         "ins_acc_x: nominally horizontal, ccw from north by ins_wander [rad]",
         "ins_acc_y: nominally horizontal, 90 [deg] ccw from ins_acc_x",
         "ins_acc_z: nominally vertical (up), includes gravity term (~navigation frame)"

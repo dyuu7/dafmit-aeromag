@@ -36,6 +36,16 @@ frame = data.read(
 
 `inspect()` and `read()` download a missing file and verify it against the catalog. Reuse the same `Dataset` to avoid repeating the checksum for unchanged files. To prohibit downloads, construct it with `offline=True`; missing local files then raise `DataUnavailableError`.
 
+Use the default cache on a personal machine. Colleagues may also download into one shared directory; the library coordinates the first download of each file. For read-only access, use offline mode:
+
+```python
+personal = Dataset()
+shared = Dataset(data_dir="/mnt/lab/dafmit-aeromag")
+shared_read_only = Dataset(data_dir="/mnt/lab/dafmit-aeromag", offline=True)
+```
+
+A writable shared directory must support cross-process file locks and allow users to create files, read each other's data files, and read/write each other's lock files. New files follow the process umask and inherited directory ACLs. On Unix, use a shared group with a setgid directory and `umask 0007`, or configure default ACLs. An existing file that fails verification raises an error; it is not replaced automatically.
+
 Reads return a pandas `DataFrame`. The normalized frame starts with `flight`, `line`, `year`, `doy`, `tt`, and `time`. `line` contains decimal strings. `tt` is the source's seconds past midnight; `time` is a UTC timestamp. Missing source identity fields are derived from the catalog's flight date and identifier. Measurements retain their source names and units.
 
 ## Choose samples explicitly

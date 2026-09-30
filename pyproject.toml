@@ -4,6 +4,7 @@ version = "0.4.0"
 description = "A Python interface to the DAF-MIT AIA open flight dataset for aircraft magnetic interference compensation and MagNav research."
 requires-python = ">=3.10"
 dependencies = [
+    "filelock>=3.32.7,<4",
     "h5py>=3.9",
     "numpy>=1.26",
     "pandas>=2.1",

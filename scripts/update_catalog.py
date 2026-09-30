@@ -16,6 +16,7 @@ import time
 import urllib.error
 import urllib.request
 import zipfile
+from collections.abc import Iterator
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -92,12 +93,41 @@ def _canonical_line(value: str) -> str:
 def _read_zip(payload: bytes) -> dict[str, str]:
     with zipfile.ZipFile(io.BytesIO(payload)) as archive:
         result: dict[str, str] = {}
+        seen: set[str] = set()
         for name in archive.namelist():
             if name.endswith("/") or "__MACOSX" in name:
                 continue
             short_name = Path(name).name
-            result[short_name] = archive.read(name).decode("utf-8", errors="replace")
+            identity = short_name.casefold()
+            if identity in seen:
+                raise ValueError(f"duplicate readme archive filename: {name}")
+            seen.add(identity)
+            content = archive.read(name)
+            try:
+                result[short_name] = content.decode("utf-8")
+            except UnicodeDecodeError as exc:
+                line = content[: exc.start].count(b"\n") + 1
+                raise ValueError(f"{name}:{line}: invalid UTF-8 text") from exc
     return result
+
+
+def _table_rows(
+    text: str, source: str, header: str, *, stop: tuple[str, ...] = ()
+) -> Iterator[tuple[int, str]]:
+    """Yield table rows with their original line numbers after a required header."""
+    in_table = False
+    for number, raw_line in enumerate(text.splitlines(), 1):
+        line = raw_line.strip()
+        if not in_table:
+            if re.fullmatch(header, line):
+                in_table = True
+            continue
+        if line.startswith(stop):
+            break
+        if line and not set(line) <= {"=", "-", " "}:
+            yield number, raw_line
+    if not in_table:
+        raise ValueError(f"{source}: missing table header matching {header!r}")
 
 
 def parse_fields(text: str, collection: str) -> list[dict[str, str]]:
@@ -105,25 +135,22 @@ def parse_fields(text: str, collection: str) -> list[dict[str, str]]:
 
     fields: list[dict[str, str]] = []
     seen: set[str] = set()
-    in_table = False
-    for raw_line in text.splitlines():
-        line = raw_line.strip()
-        if line.lower().startswith("field") and "description" in line.lower():
-            in_table = True
-            continue
-        if not in_table or not line or set(line) <= {"=", "-", " "}:
-            continue
-        if line.lower().startswith(("notes", "references", "the following")):
-            break
+    source = f"sgl_{collection}_fields_readme.txt"
+    for number, raw_line in _table_rows(
+        text,
+        source,
+        r"Field\s+Units\s+Description",
+        stop=("Notes", "References", "The following"),
+    ):
         match = re.match(
             r"^\s*([A-Za-z][A-Za-z0-9_]*)\s+(\S+)\s{2,}(.+?)\s*$",
             raw_line,
         )
         if match is None:
-            continue
+            raise ValueError(f"{source}:{number}: invalid field row: {raw_line!r}")
         name, units, description = match.groups()
         if name in seen:
-            continue
+            raise ValueError(f"{source}:{number}: duplicate field {name!r}")
         seen.add(name)
         fields.append(
             {
@@ -135,7 +162,7 @@ def parse_fields(text: str, collection: str) -> list[dict[str, str]]:
             }
         )
     if not fields:
-        raise ValueError(f"could not parse any fields for collection {collection}")
+        raise ValueError(f"{source}: field table is empty")
     return fields
 
 
@@ -148,35 +175,40 @@ def parse_field_notes(
 
     marker = "Notes on specific flight data fields:"
     if marker not in text:
-        return {}
-    section = text.split(marker, 1)[1].split("Magnetometer/Fluxgate positions", 1)[0]
+        raise ValueError(
+            f"sgl_{collection}_fields_readme.txt: missing field notes section"
+        )
+    preamble, section = text.split(marker, 1)
+    section = section.split("Magnetometer/Fluxgate positions", 1)[0]
+    source = f"sgl_{collection}_fields_readme.txt"
     notes: dict[str, list[str]] = {}
     current: tuple[str, ...] = ()
-    for raw_line in section.splitlines():
+    for number, raw_line in enumerate(section.splitlines(), preamble.count("\n") + 1):
         line = raw_line.strip()
         if not line or set(line) <= {"=", "-", " "}:
             continue
-        if line.startswith("-"):
-            if current:
-                value = line.lstrip("- ").strip()
-                for name in current:
-                    notes.setdefault(name, []).append(value)
+        if line.startswith("-") and current:
+            value = line.lstrip("- ").strip()
+            for name in current:
+                notes.setdefault(name, []).append(value)
             continue
         names = tuple(
             part.strip() for part in re.split(r"\s*(?:,|&)\s*", line) if part.strip()
         )
         if names and all(name in field_names for name in names):
             current = names
+        elif raw_line[:1].isspace() and current and all(notes.get(n) for n in current):
+            for name in current:
+                notes[name][-1] += f" {line}"
+        else:
+            raise ValueError(f"{source}:{number}: invalid field note: {raw_line!r}")
     return notes
 
 
 def parse_sensor_layout(text: str, collection: str) -> list[dict[str, Any]]:
     """Parse the primary magnetometer/fluxgate layout table."""
 
-    marker = "Magnetometer/Fluxgate positions"
-    if marker not in text:
-        return []
-    section = text.split(marker, 1)[1].split("For Flt1008", 1)[0]
+    source = f"sgl_{collection}_fields_readme.txt"
     number = r"[-+]?(?:\d+(?:\.\d*)?|\.\d+)"
     pattern = re.compile(
         rf"^(?P<sensor>Mag \d|Flux [A-D])\s+"
@@ -184,20 +216,32 @@ def parse_sensor_layout(text: str, collection: str) -> list[dict[str, Any]]:
         rf"(?P<x>{number})\s+(?P<y>{number})\s+(?P<z>{number})\s*$"
     )
     rows: list[dict[str, Any]] = []
-    for raw_line in section.splitlines():
+    seen: set[str] = set()
+    for number, raw_line in _table_rows(
+        text,
+        source,
+        r"Sensor\s+Description\s+X\s+Y\s+Z",
+        stop=("For Flt1008",),
+    ):
         match = pattern.match(raw_line.strip())
         if match is None:
-            continue
+            raise ValueError(f"{source}:{number}: invalid sensor row: {raw_line!r}")
+        sensor = match.group("sensor")
+        if sensor in seen:
+            raise ValueError(f"{source}:{number}: duplicate sensor {sensor!r}")
+        seen.add(sensor)
         rows.append(
             {
                 "collection": collection,
-                "sensor": match.group("sensor"),
+                "sensor": sensor,
                 "description": match.group("description").strip(),
                 "x": float(match.group("x")),
                 "y": float(match.group("y")),
                 "z": float(match.group("z")),
             }
         )
+    if not rows:
+        raise ValueError(f"{source}: sensor table is empty")
     return rows
 
 
@@ -218,15 +262,18 @@ def parse_flight_notes(text: str) -> list[str]:
 def parse_flight_readme(text: str, flight: int) -> tuple[str, list[dict[str, Any]]]:
     """Parse a flight readme into its date and segment rows."""
 
+    source = f"Flt{flight}_readme.txt"
     date_match = _DATE_RE.search(text)
     if date_match is None:
-        raise ValueError(f"could not find collection date for flight {flight}")
+        raise ValueError(f"{source}: missing collection date")
     collection_date = datetime.strptime(date_match.group("date"), "%d-%b-%Y").date()
     segments: list[dict[str, Any]] = []
-    for raw_line in text.splitlines():
+    for number, raw_line in _table_rows(
+        text, source, r"Start Time\s+End Time\s+Line Number\s+Description"
+    ):
         match = _LINE_RE.match(raw_line)
         if match is None:
-            continue
+            raise ValueError(f"{source}:{number}: invalid segment row: {raw_line!r}")
         start, stop, line, description = match.groups()
         lowered = description.lower()
         is_holdout = "hold-out" in lowered or "holdout" in lowered
@@ -242,7 +289,7 @@ def parse_flight_readme(text: str, flight: int) -> tuple[str, list[dict[str, Any
             }
         )
     if not segments:
-        raise ValueError(f"could not parse segments for flight {flight}")
+        raise ValueError(f"{source}: segment table is empty")
     return collection_date.isoformat(), segments
 
 
@@ -254,6 +301,8 @@ def _file_metadata(record: dict[str, Any]) -> dict[int, dict[str, Any]]:
         if match is None:
             continue
         flight = int(match.group("flight"))
+        if flight in files:
+            raise ValueError(f"duplicate flight {flight} in Zenodo record: {key}")
         checksum = item.get("checksum", "")
         if not checksum.startswith("md5:"):
             raise ValueError(f"unexpected checksum for {key}: {checksum}")

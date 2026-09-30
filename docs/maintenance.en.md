@@ -15,9 +15,15 @@ The public interface is `Dataset`, immutable `Selection`, and the `FlightInfo` r
 
 The reader must not infer sample membership from `is_holdout`. Missing-field filling must not become corruption recovery. Do not introduce another public configuration layer for choices already expressed by `Selection` or `read` arguments.
 
+## Shared data directories
+
+Personal caches and shared directories use the same `Dataset(data_dir=...)` interface. A writable shared directory must allow users to create files, read each other's data files, and read/write each other's hidden lock files. New files follow the process umask and inherited directory ACLs; on Unix, configure a shared group with a setgid directory and `umask 0007`, or default ACLs. The filesystem must support cross-process file locks and atomic renames within the directory.
+
+Downloads of missing files lock each target and check again whether another process has finished the download. Files are downloaded and verified in a temporary directory on the same filesystem, then atomically moved into place; failed downloads are cleaned up. Lock files remain in place to preserve their identity. Waiting more than one hour or encountering an unsupported lock raises `DataUnavailableError`; the library does not download without a lock. Use `offline=True` for read-only shared directories; reads do not create lock files. When an existing file fails verification, a maintainer should investigate and replace it rather than relying on silent repair.
+
 ## Update the catalog
 
-The bundled catalog and generation script are fixed to Zenodo v3, record `12723700`. Rebuild the catalog when reviewing source metadata or changing its parsing rules:
+The bundled catalog and generation script are fixed to Zenodo v3, record `12723700`. The parser preserves wrapped field notes and rejects unrecognized table rows, field-note headings, and duplicate identities instead of generating an incomplete catalog. Rebuild the catalog when reviewing source metadata or changing its parsing rules:
 
 ```bash
 uv run python scripts/update_catalog.py
@@ -42,7 +48,7 @@ uv run --no-sync mkdocs build --strict
 uv run --no-sync python -m build
 ```
 
-Ordinary tests create small real HDF5 files with matching test manifest hashes. They exercise public behavior, checksum reuse/invalidation, schema and coordinate corruption, batch order/empty results, and resource cleanup. Catalog-generation tests use synthetic release metadata and readme archives without a network dependency. CI tests Python 3.10–3.14 and collects coverage on Python 3.13. Version consistency, static checks, bilingual page checks, and documentation and distribution builds run once in a separate job. Workflows use `uv sync --locked` to reject an outdated lockfile. The publish workflow reuses this same CI workflow to validate the tagged commit and build its distributions.
+Ordinary tests create small real HDF5 files with matching test manifest hashes. They exercise public behavior, checksum reuse/invalidation, concurrent shared-directory downloads, schema and coordinate corruption, batch order/empty results, and resource cleanup. Catalog-generation tests use synthetic release metadata and readme archives without a network dependency. CI tests Python 3.10–3.14 and collects coverage on Python 3.13. Version consistency, static checks, bilingual page checks, and documentation and distribution builds run once in a separate job. Workflows use `uv sync --locked` to reject an outdated lockfile. The publish workflow reuses this same CI workflow to validate the tagged commit and build its distributions.
 
 ## Test the published payloads
 
@@ -56,7 +62,7 @@ This verifies Flt1004 and Flt2005 from both collections. To reuse downloaded ori
 MAGNAV_INTEGRATION=1 MAGNAV_DATA_DIR=/path/to/flight-files uv run pytest -m integration
 ```
 
-See the [file audit](data-audit.md) for pinned sizes, checksums, expected counts, and the boundary regression. An unchanged source file can be reused; do not modify fixtures to conceal a real upstream mismatch. The Data integration workflow provides a manual `workflow_dispatch` entry point, separate from ordinary CI. Run it on the relevant branch or tag after changes to the reader, storage layer, or catalog, and before releasing. It has no scheduled trigger.
+See the [file audit](data-audit.md) for pinned sizes, checksums, expected counts, and the boundary regression. An unchanged source file can be reused; do not modify fixtures to conceal a real upstream mismatch. The Data integration workflow also checks the bundled catalog against Zenodo and remains available through `workflow_dispatch`. Run it on a relevant branch after changing the reader, storage layer, or catalog. Publishing requires both this workflow and ordinary CI to pass; an unavailable Zenodo service blocks the release.
 
 ## Documentation and releases
 
@@ -64,4 +70,4 @@ Documentation describes the current interface and usage. The file audit preserve
 
 Before release, run tests, lint, format/type checks, documentation and distribution builds; review provenance/terms links. Set the package version in `pyproject.toml`, update `CITATION.cff` to match, and run `uv lock` to refresh the lockfile. Runtime `__version__` comes from the installed package metadata, including editable installs created by `uv sync`. Ordinary CI checks the citation version against that metadata after syncing the project.
 
-Creating a `vX.Y.Z` tag triggers the publish workflow, which runs the complete CI workflow on that commit and additionally checks the tag against the package version. Run `uv run python scripts/check_versions.py --tag vX.Y.Z` locally to check a proposed tag. After validation succeeds, the workflow publishes those same build artifacts through PyPI Trusted Publishing, then creates a GitHub Release with the distributions attached. Each tag creates one Release; existing Releases and their assets are not overwritten. Add a brief note about changes affecting usage or results to the corresponding GitHub Release when needed.
+Creating a `vX.Y.Z` tag triggers the publish workflow, which runs complete CI and real-data checks on that commit and additionally checks the tag against the package version. Run `uv run python scripts/check_versions.py --tag vX.Y.Z` locally to check a proposed tag. After validation succeeds, the workflow publishes those same build artifacts through PyPI Trusted Publishing, then creates a GitHub Release with the distributions attached. Each tag creates one Release; existing Releases and their assets are not overwritten. Add a brief note about changes affecting usage or results to the corresponding GitHub Release when needed.

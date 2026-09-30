@@ -13,8 +13,11 @@ jobs:
     with:
       upload-distributions: true
 
+  real-data:
+    uses: ./.github/workflows/integration.yml
+
   publish:
-    needs: validate
+    needs: [validate, real-data]
     runs-on: ubuntu-latest
     permissions:
       id-token: write

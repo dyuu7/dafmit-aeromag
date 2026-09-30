@@ -36,6 +36,16 @@ frame = data.read(
 
 `inspect()` 和 `read()` 会下载缺失的文件，并按照目录中的信息校验。复用同一个 `Dataset`，可以避免对没有变化的文件重复计算校验和。若不允许下载，构造时指定 `offline=True`；本地缺少文件时会抛出 `DataUnavailableError`。
 
+本机使用默认缓存即可；实验室共享目录可由多位同事按需下载，库会协调同一文件的首次下载。只有读取权限时，使用离线模式：
+
+```python
+personal = Dataset()
+shared = Dataset(data_dir="/mnt/lab/dafmit-aeromag")
+shared_read_only = Dataset(data_dir="/mnt/lab/dafmit-aeromag", offline=True)
+```
+
+共享可写目录需要支持跨进程文件锁，并允许使用者创建文件、读取其他成员的数据文件，以及读写其他成员的锁文件。新文件遵循进程的 umask 与目录继承的 ACL。在 Unix 上，可使用共同用户组及 setgid 目录，配合 `umask 0007`，或配置默认 ACL。已存在但校验失败的文件会报错，不会自动替换。
+
 读取返回 pandas `DataFrame`。标准化结果以 `flight`、`line`、`year`、`doy`、`tt`、`time` 六列开头。`line` 是小数字符串；`tt` 是源文件记录的午夜后秒数；`time` 是 UTC 时间戳。源文件缺少身份字段时，根据目录中的航次编号和日期补齐。测量字段保留原始名称和单位。
 
 ## 明确选择哪些样本
